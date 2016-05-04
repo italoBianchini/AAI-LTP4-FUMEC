@@ -8,7 +8,7 @@ import model.ClienteModel;
 
 /**
  * A classe <b>ClienteDAO</b> implementa os metodos de acesso ao banco
- * relacionados ao objeto <b>ClienteModel</b>.<br>
+ * relacionados ao objeto <b>ClienteModel</b>.
  * Pacote dao.
  *
  * @author Ítalo Bianchini
