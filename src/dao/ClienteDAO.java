@@ -28,7 +28,7 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
 
             connection = Conexao.getInstance().getConnection();
 
-            String sql = "INSERT INTO Clientes (codCliente, Nome, Endereco, Bairro, Cidade, Uf, Cep, Telefone, E_mail, dataCadCliente)" + "VALUES(?,?,?,?,?,?)";
+            String sql = "INSERT INTO Clientes (codCliente, Nome, Endereco, Bairro, Cidade, Uf, Cep, Telefone, E_mail, data_Cad_Cliente)" + "VALUES(?,?,?,?,?,?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
