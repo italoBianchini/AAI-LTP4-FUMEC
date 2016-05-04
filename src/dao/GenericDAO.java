@@ -11,7 +11,7 @@ import Exception.PersistenciaException;
  * @since Maio, 2016
  * @version 1.0
  */
-public class GenericDAO<genericObject> {
+public interface GenericDAO<genericObject> {
 
     /**
      * Método generico para inserir dados no banco
@@ -21,9 +21,6 @@ public class GenericDAO<genericObject> {
      * @throws PersistenciaException
      * @since Maio, 2016
      */
-    public interface GenericDAO<genericObject> {
-
-        boolean Inserir(genericObject obj) throws PersistenciaException;
-    }
+    boolean Inserir(genericObject obj) throws PersistenciaException;
 
 }
