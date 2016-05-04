@@ -5,6 +5,7 @@ import java.sql.Date;
 /**
  * A classe <b>ClienteModel</b> é responsável pelos atributos e formatações do
  * objeto <b>Cliente.</b>
+ * Pacote: Model
  *
  * @author Ítalo Bianchini
  * @since Maio, 2016
