@@ -32,15 +32,15 @@ public class ClienteDAOTest {
 
         Date data = new Date(System.currentTimeMillis());
 
-        clienteModel.setCodigoCliente(1);
-        clienteModel.setNome("teste");
-        clienteModel.setEndereco("teste");
-        clienteModel.setBairro("teste");
-        clienteModel.setCidade("teste");
-        clienteModel.setUf("teste");
-        clienteModel.setCep("teste");
-        clienteModel.setTelefone("teste");
-        clienteModel.setEmail("teste");
+        clienteModel.setCodigoCliente(2);
+        clienteModel.setNome("te");
+        clienteModel.setEndereco("te");
+        clienteModel.setBairro("te");
+        clienteModel.setCidade("te");
+        clienteModel.setUf("te");
+        clienteModel.setCep("te");
+        clienteModel.setTelefone("te");
+        clienteModel.setEmail("te");
         clienteModel.setDataDeCadastro(data);
 
         try {
