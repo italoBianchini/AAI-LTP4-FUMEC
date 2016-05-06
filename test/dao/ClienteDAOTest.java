@@ -12,10 +12,8 @@ import static org.junit.Assert.*;
  * @author Ítalo
  */
 public class ClienteDAOTest {
-
-    public ClienteDAOTest() {
-    }
-
+            
+    private ClienteModel clienteModel;
     @Before
     public void setUp() {
     }
@@ -28,20 +26,19 @@ public class ClienteDAOTest {
     @Test
     public void testInserir() throws Exception {
 
-        ClienteModel clienteModel = new ClienteModel();
 
         Date data = new Date(System.currentTimeMillis());
 
-        clienteModel.setCodigoCliente(2);
-        clienteModel.setNome("te");
-        clienteModel.setEndereco("te");
-        clienteModel.setBairro("te");
-        clienteModel.setCidade("te");
-        clienteModel.setUf("te");
-        clienteModel.setCep("te");
-        clienteModel.setTelefone("te");
-        clienteModel.setEmail("te");
-        clienteModel.setDataDeCadastro(data);
+       this. clienteModel.setCodigoCliente(2);
+       this. clienteModel.setNome("te");
+       this. clienteModel.setEndereco("te");
+        this.clienteModel.setBairro("te");
+        this.clienteModel.setCidade("te");
+        this.clienteModel.setUf("te");
+        this.clienteModel.setCep("te");
+        this.clienteModel.setTelefone("te");
+        this.clienteModel.setEmail("te");
+        this.clienteModel.setDataDeCadastro(data);
 
         try {
 
