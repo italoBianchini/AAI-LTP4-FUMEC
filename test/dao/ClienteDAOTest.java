@@ -26,6 +26,7 @@ public class ClienteDAOTest {
     @Test
     public void testInserir() throws Exception {
 
+        ClienteModel cliente = ClienteModel.CriarCliente();
 
         Date data = new Date(System.currentTimeMillis());
 

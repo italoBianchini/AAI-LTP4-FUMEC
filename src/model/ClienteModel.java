@@ -13,6 +13,18 @@ import java.sql.Date;
  */
 public class ClienteModel {
 
+    public static ClienteModel CriarCliente() {
+        return new ClienteModel();
+    }
+
+    public static ClienteModel CriarClienteIncompleto(Integer codigoCliente, String nome, String endereco, String bairro, String cidade, String uf, String cep, Date dataDeCadastro) {
+        return new ClienteModel(codigoCliente, nome, endereco, bairro, cidade, uf, cep, dataDeCadastro);
+    }
+
+    public static ClienteModel CriarClienteCompleto(Integer codigoCliente, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email, Date dataDeCadastro) {
+        return new ClienteModel(codigoCliente, nome, endereco, bairro, cidade, uf, cep, telefone, email, dataDeCadastro);
+    }
+
     private Integer codigoCliente;
     private String nome;
     private String endereco;
@@ -24,13 +36,14 @@ public class ClienteModel {
     private String email;
     private Date dataDeCadastro;
 
-    public ClienteModel() {
+    private ClienteModel() {
 
     }
-    
+
     /**
-     *Construtor sobrecarregado com atributos obrigatórios para a classe <b>ClienteModel</b>
-     * 
+     * Construtor sobrecarregado com atributos obrigatórios para a classe
+     * <b>ClienteModel</b>
+     *
      * @param codigoCliente
      * @param nome
      * @param endereco
@@ -41,7 +54,7 @@ public class ClienteModel {
      * @param dataDeCadastro
      * @since Maio, 2016
      */
-    public ClienteModel(Integer codigoCliente, String nome, String endereco, String bairro, String cidade, String uf, String cep, Date dataDeCadastro) {
+    private ClienteModel(Integer codigoCliente, String nome, String endereco, String bairro, String cidade, String uf, String cep, Date dataDeCadastro) {
         this.codigoCliente = codigoCliente;
         this.nome = nome;
         this.endereco = endereco;
@@ -54,10 +67,10 @@ public class ClienteModel {
         this.dataDeCadastro = dataDeCadastro;
     }
 
-    
-     /**
-     *Construtor sobrecarregado com todos os atributos para a classe <b>ClienteModel</b>
-     * 
+    /**
+     * Construtor sobrecarregado com todos os atributos para a classe
+     * <b>ClienteModel</b>
+     *
      * @param codigoCliente
      * @param nome
      * @param endereco
@@ -70,7 +83,7 @@ public class ClienteModel {
      * @param dataDeCadastro
      * @since Maio, 2016
      */
-    public ClienteModel(Integer codigoCliente, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email, Date dataDeCadastro) {
+    private ClienteModel(Integer codigoCliente, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email, Date dataDeCadastro) {
         this.codigoCliente = codigoCliente;
         this.nome = nome;
         this.endereco = endereco;
@@ -168,7 +181,4 @@ public class ClienteModel {
         return "ClienteModel{" + "codigoCliente=" + codigoCliente + ", nome=" + nome + ", endereco=" + endereco + ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + ", cep=" + cep + ", telefone=" + telefone + ", email=" + email + ", dataDeCadastro=" + dataDeCadastro + '}';
     }
 
-    
-    
-    
 }
