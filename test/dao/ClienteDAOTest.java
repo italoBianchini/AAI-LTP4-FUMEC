@@ -1,6 +1,7 @@
 package dao;
 
 import Exception.PersistenciaException;
+import Util.UtilTestes;
 import java.sql.Date;
 import model.ClienteModel;
 import org.junit.Before;
@@ -12,8 +13,9 @@ import static org.junit.Assert.*;
  * @author Ítalo
  */
 public class ClienteDAOTest {
-            
+
     private ClienteModel clienteModel;
+
     @Before
     public void setUp() {
     }
@@ -26,20 +28,18 @@ public class ClienteDAOTest {
     @Test
     public void testInserir() throws Exception {
 
-        ClienteModel cliente = ClienteModel.CriarCliente();
+        clienteModel = ClienteModel.CriarCliente();
 
-        Date data = new Date(System.currentTimeMillis());
-
-       this. clienteModel.setCodigoCliente(2);
-       this. clienteModel.setNome("te");
-       this. clienteModel.setEndereco("te");
-        this.clienteModel.setBairro("te");
-        this.clienteModel.setCidade("te");
-        this.clienteModel.setUf("te");
-        this.clienteModel.setCep("te");
-        this.clienteModel.setTelefone("te");
-        this.clienteModel.setEmail("te");
-        this.clienteModel.setDataDeCadastro(data);
+        clienteModel.setCodigoCliente(UtilTestes.criaIdAleatorio());
+        clienteModel.setNome("te");
+        clienteModel.setEndereco("te");
+        clienteModel.setBairro("te");
+        clienteModel.setCidade("te");
+        clienteModel.setUf("te");
+        clienteModel.setCep("te");
+        clienteModel.setTelefone("te");
+        clienteModel.setEmail("te");
+        clienteModel.setDataDeCadastro(UtilTestes.criaDataCorrente());
 
         try {
 

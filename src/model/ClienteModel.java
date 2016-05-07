@@ -40,20 +40,7 @@ public class ClienteModel {
 
     }
 
-    /**
-     * Construtor sobrecarregado com atributos obrigatórios para a classe
-     * <b>ClienteModel</b>
-     *
-     * @param codigoCliente
-     * @param nome
-     * @param endereco
-     * @param bairro
-     * @param cidade
-     * @param uf
-     * @param cep
-     * @param dataDeCadastro
-     * @since Maio, 2016
-     */
+
     private ClienteModel(Integer codigoCliente, String nome, String endereco, String bairro, String cidade, String uf, String cep, Date dataDeCadastro) {
         this.codigoCliente = codigoCliente;
         this.nome = nome;
@@ -67,22 +54,7 @@ public class ClienteModel {
         this.dataDeCadastro = dataDeCadastro;
     }
 
-    /**
-     * Construtor sobrecarregado com todos os atributos para a classe
-     * <b>ClienteModel</b>
-     *
-     * @param codigoCliente
-     * @param nome
-     * @param endereco
-     * @param bairro
-     * @param cidade
-     * @param uf
-     * @param cep
-     * @param telefone
-     * @param email
-     * @param dataDeCadastro
-     * @since Maio, 2016
-     */
+
     private ClienteModel(Integer codigoCliente, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email, Date dataDeCadastro) {
         this.codigoCliente = codigoCliente;
         this.nome = nome;
