@@ -2,7 +2,6 @@ package dao;
 
 import Exception.PersistenciaException;
 import Util.UtilTestes;
-import java.sql.Date;
 import model.ClienteModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +14,7 @@ import static org.junit.Assert.*;
 public class ClienteDAOTest {
 
     private ClienteModel clienteModel;
-    private ClienteDAO clienteDAO
+    private ClienteDAO clienteDAO;
 
     @Before
     public void setUp() {
