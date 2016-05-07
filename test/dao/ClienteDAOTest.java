@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 public class ClienteDAOTest {
 
     private ClienteModel clienteModel;
+    private ClienteDAO clienteDAO
 
     @Before
     public void setUp() {
@@ -43,7 +44,7 @@ public class ClienteDAOTest {
 
         try {
 
-            ClienteDAO clienteDAO = new ClienteDAO();
+            clienteDAO = new ClienteDAO();
             assertTrue(clienteDAO.Inserir(clienteModel));
 
         } catch (Exception exception) {
