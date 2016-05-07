@@ -8,7 +8,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ *A Classe <b>ClienteDAOTest</b> é responsável pelos testes do <b>ClienteModel</b>
+ * PacoteTest: dao
+ * 
+ * 
  * @author Ítalo
  */
 public class ClienteDAOTest {
@@ -29,6 +32,7 @@ public class ClienteDAOTest {
     public void testInserir() throws Exception {
 
         clienteModel = ClienteModel.CriarCliente();
+         clienteDAO = new ClienteDAO();
 
         clienteModel.setCodigoCliente(UtilTestes.criaIdAleatorio());
         clienteModel.setNome("te");
@@ -43,7 +47,7 @@ public class ClienteDAOTest {
 
         try {
 
-            clienteDAO = new ClienteDAO();
+           
             assertTrue(clienteDAO.Inserir(clienteModel));
 
         } catch (Exception exception) {
