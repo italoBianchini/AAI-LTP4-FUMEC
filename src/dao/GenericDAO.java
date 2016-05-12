@@ -13,14 +13,9 @@ import Exception.PersistenciaException;
  */
 public interface GenericDAO<genericObject> {
 
-    /**
-     * Método generico para inserir dados no banco
-     *
-     * @param obj
-     * @return booleano
-     * @throws PersistenciaException
-     * @since Maio, 2016
-     */
-    boolean Inserir(genericObject obj) throws PersistenciaException;
+   
+    boolean inserir(genericObject obj) throws PersistenciaException;
+    
+     Object recuperarPorId(int  id) throws PersistenciaException;
 
 }

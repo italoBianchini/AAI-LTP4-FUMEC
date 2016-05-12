@@ -4,12 +4,12 @@ import Exception.PersistenciaException;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import model.ClienteModel;
 
 /**
  * A classe <b>ClienteDAO</b> implementa os metodos de acesso ao banco
- * relacionados ao objeto <b>ClienteModel</b>.
- * Pacote dao.
+ * relacionados ao objeto <b>ClienteModel</b>. Pacote dao.
  *
  * @author Ítalo Bianchini
  * @since Maio, 2016
@@ -17,8 +17,10 @@ import model.ClienteModel;
  */
 public class ClienteDAO implements GenericDAO<ClienteModel> {
 
+    private String sqlBase = "SELECT codCliente, nome, endereco, bairro, cidade, uf, cep, telefone, e_mail, data_cad_cliente from Clientes ";
+
     @Override
-    public boolean Inserir(ClienteModel clienteModel) throws PersistenciaException {
+    public boolean inserir(ClienteModel clienteModel) throws PersistenciaException {
 
         boolean inseriuCorretamente = false;
 
@@ -54,6 +56,48 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
         return inseriuCorretamente;
     }
 
+    @Override
+    public ClienteModel recuperarPorId(int idCliente) throws PersistenciaException {
+
+        Connection connection;
+        ClienteModel clienteModel = ClienteModel.CriarCliente();
+
+        try {
+
+            connection = Conexao.getInstance().getConnection();
+
+            String sql = sqlBase + "WHERE codCliente = ? ";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, idCliente);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+
+                clienteModel.setCodigoCliente(idCliente);
+                clienteModel.setNome(resultSet.getString("Nome"));
+                clienteModel.setEndereco(resultSet.getString("Endereco"));
+                clienteModel.setBairro(resultSet.getString("Bairro"));
+                clienteModel.setCidade(resultSet.getString("Cidade"));
+                clienteModel.setUf(resultSet.getString("Uf"));
+                clienteModel.setCep(resultSet.getString("Cep"));
+                clienteModel.setTelefone(resultSet.getString("Telefone"));
+                clienteModel.setEmail(resultSet.getString("E_mail"));
+                clienteModel.setDataDeCadastro(resultSet.getDate("data_cad_cliente"));
+            }else{
+                
+                throw  new PersistenciaException("Cliente não cadastrado!");
+            }
+
+            connection.close();
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        return clienteModel;
+
+    }
+
 }
-
-
