@@ -47,7 +47,7 @@ public class ClienteDAOTest {
 
         try {
 
-            assertTrue(clienteDAO.Inserir(clienteModel));
+            assertTrue(clienteDAO.inserir(clienteModel));
 
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
