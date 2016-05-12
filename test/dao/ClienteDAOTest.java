@@ -27,12 +27,12 @@ public class ClienteDAOTest {
      * Test of Inserir method, of class ClienteDAO.
      *
      * @throws Exception.PersistenciaException
-     * 
+     *
      */
     @Test
     public void testInserir() throws PersistenciaException {
 
-        clienteModel = ClienteModel.CriarCliente();
+        clienteModel = ClienteModel.CriarClienteVazio();
         clienteDAO = new ClienteDAO();
 
         clienteModel.setCodigoCliente(UtilTestes.criaIdAleatorio());
@@ -58,30 +58,46 @@ public class ClienteDAOTest {
 
     /**
      * Test of recuperarPorId method, of class ClienteDAO.
+     *
      * @throws Exception.PersistenciaException
      */
     @Test
     public void testRecuperarPorId() throws PersistenciaException {
-        
+
         int idCLiente = 2;
         clienteDAO = new ClienteDAO();
-        
+
         clienteModel = clienteDAO.recuperarPorId(idCLiente);
-        
-         try {
-             
-             assertNotNull(clienteModel);
- 
+
+        try {
+
+            assertNotNull(clienteModel);
+
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
         }
-        
-        
+
     }
 
-    
-    
-    
-    
-    
+    /**
+     * Test of delete method, of class ClienteDAO.
+     *
+     * @throws Exception.PersistenciaException
+     */
+    @Test
+    public void testDelete() throws PersistenciaException {
+
+        clienteModel = ClienteModel.CriarClienteVazio();
+        clienteModel.setCodigoCliente(45);
+        clienteDAO = new ClienteDAO();
+
+        try {
+            assertTrue(clienteDAO.delete(clienteModel));
+
+        } catch (Exception exception) {
+            throw new PersistenciaException(exception.getMessage());
+        }
+
+    }
+
 }

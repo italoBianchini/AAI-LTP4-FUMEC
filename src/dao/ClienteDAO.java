@@ -16,8 +16,8 @@ import model.ClienteModel;
  * @since Maio, 2016
  * @version 1.0
  */
-public class ClienteDAO implements GenericDAO<ClienteModel> { 
-    
+public class ClienteDAO implements GenericDAO<ClienteModel> {
+
     private final String SQL_BASE = "SELECT codCliente, nome, endereco, bairro, cidade, uf, cep, telefone, e_mail, data_cad_cliente from Clientes ";
 
     @Override
@@ -59,9 +59,8 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
 
     @Override
     public ClienteModel recuperarPorId(int idCliente) throws PersistenciaException {
-
         Connection connection;
-        ClienteModel clienteModel = ClienteModel.CriarCliente();
+        ClienteModel clienteModel = ClienteModel.CriarClienteVazio();
 
         try {
 
@@ -87,9 +86,9 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
                 clienteModel.setTelefone(resultSet.getString("Telefone"));
                 clienteModel.setEmail(resultSet.getString("E_mail"));
                 clienteModel.setDataDeCadastro(resultSet.getDate("data_cad_cliente"));
-            }else{
-                
-                throw  new ClienteExcption("Cliente não cadastrado!");
+            } else {
+
+                throw new ClienteExcption("Cliente não cadastrado!");
             }
 
             connection.close();
@@ -99,6 +98,33 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
         }
         return clienteModel;
 
+    }
+
+    @Override
+    public boolean delete(ClienteModel clienteModel) throws PersistenciaException {
+        Connection connection;
+        boolean excluiuCorretamente = false;
+
+        try {
+
+            connection = conexao.Conexao.getInstance().getConnection();
+
+            String sql = "DELETE FROM Clientes WHERE codCliente = ? ";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, clienteModel.getCodigoCliente());
+
+            statement.executeUpdate();
+
+            excluiuCorretamente = true;
+
+            connection.close();
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        return excluiuCorretamente;
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class ClienteModel {
 
-    public static ClienteModel CriarCliente() {
+    public static ClienteModel CriarClienteVazio() {
         return new ClienteModel();
     }
 
