@@ -1,5 +1,6 @@
 package dao;
 
+import Exception.ClienteExcption;
 import Exception.PersistenciaException;
 import conexao.Conexao;
 import java.sql.Connection;
@@ -15,8 +16,8 @@ import model.ClienteModel;
  * @since Maio, 2016
  * @version 1.0
  */
-public class ClienteDAO implements GenericDAO<ClienteModel> {
-
+public class ClienteDAO implements GenericDAO<ClienteModel> { 
+    
     private final String SQL_BASE = "SELECT codCliente, nome, endereco, bairro, cidade, uf, cep, telefone, e_mail, data_cad_cliente from Clientes ";
 
     @Override
@@ -88,7 +89,7 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
                 clienteModel.setDataDeCadastro(resultSet.getDate("data_cad_cliente"));
             }else{
                 
-                throw  new PersistenciaException("Cliente não cadastrado!");
+                throw  new ClienteExcption("Cliente não cadastrado!");
             }
 
             connection.close();

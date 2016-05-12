@@ -26,10 +26,11 @@ public class ClienteDAOTest {
     /**
      * Test of Inserir method, of class ClienteDAO.
      *
-     * @throws java.lang.Exception
+     * @throws Exception.PersistenciaException
+     * 
      */
     @Test
-    public void testInserir() throws Exception {
+    public void testInserir() throws PersistenciaException {
 
         clienteModel = ClienteModel.CriarCliente();
         clienteDAO = new ClienteDAO();
@@ -55,4 +56,32 @@ public class ClienteDAOTest {
 
     }
 
+    /**
+     * Test of recuperarPorId method, of class ClienteDAO.
+     * @throws Exception.PersistenciaException
+     */
+    @Test
+    public void testRecuperarPorId() throws PersistenciaException {
+        
+        int idCLiente = 2;
+        clienteDAO = new ClienteDAO();
+        
+        clienteModel = clienteDAO.recuperarPorId(idCLiente);
+        
+         try {
+             
+             assertNotNull(clienteModel);
+ 
+        } catch (Exception exception) {
+            throw new PersistenciaException(exception.getMessage());
+        }
+        
+        
+    }
+
+    
+    
+    
+    
+    
 }
