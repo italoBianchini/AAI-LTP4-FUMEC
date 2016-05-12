@@ -17,7 +17,7 @@ import model.ClienteModel;
  */
 public class ClienteDAO implements GenericDAO<ClienteModel> {
 
-    private String sqlBase = "SELECT codCliente, nome, endereco, bairro, cidade, uf, cep, telefone, e_mail, data_cad_cliente from Clientes ";
+    private final String SQL_BASE = "SELECT codCliente, nome, endereco, bairro, cidade, uf, cep, telefone, e_mail, data_cad_cliente from Clientes ";
 
     @Override
     public boolean inserir(ClienteModel clienteModel) throws PersistenciaException {
@@ -66,7 +66,7 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
 
             connection = Conexao.getInstance().getConnection();
 
-            String sql = sqlBase + "WHERE codCliente = ? ";
+            String sql = SQL_BASE + "WHERE codCliente = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
