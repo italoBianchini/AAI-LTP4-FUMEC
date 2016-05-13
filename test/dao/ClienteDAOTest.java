@@ -6,6 +6,8 @@ import model.ClienteModel;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
+
 
 /**
  * A Classe <b>ClienteDAOTest</b> é responsável pelos testes do
@@ -16,8 +18,8 @@ import static org.junit.Assert.*;
  */
 public class ClienteDAOTest {
 
-    private ClienteModel clienteModel;
-    private ClienteDAO clienteDAO;
+    private static ClienteModel clienteModel;
+    private static ClienteDAO clienteDAO;
 
     @Before
     public void setUp() {
@@ -84,6 +86,7 @@ public class ClienteDAOTest {
      *
      * @throws Exception.PersistenciaException
      */
+    @Ignore
     @Test
     public void testDelete() throws PersistenciaException {
 
@@ -99,5 +102,30 @@ public class ClienteDAOTest {
         }
 
     }
+
+    /**
+     * Test of alterar method, of class ClienteDAO.
+     *
+     * @throws Exception.PersistenciaException
+     */
+    @Test
+    public void testAlterar() throws PersistenciaException {
+
+        clienteModel = ClienteModel.CriarClienteVazio();
+        clienteDAO = new ClienteDAO();
+
+        try {
+            clienteModel = clienteDAO.recuperarPorId(2);
+            clienteModel.setNome(UtilTestes.criaPalavraAleatoria());
+
+            assertTrue(clienteDAO.alterar(clienteModel));
+
+        } catch (Exception exception) {
+            throw new PersistenciaException(exception.getMessage());
+        }
+
+    }
+    
+  
 
 }

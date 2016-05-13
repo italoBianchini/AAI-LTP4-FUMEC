@@ -42,8 +42,6 @@ public class Conexao {
 
     @SuppressWarnings("CallToPrintStackTrace")
     public static void main(String[] args) throws Exception {
-
-        
         try {
             System.out.println(getInstance().getConnection());
         } catch (Exception e) {    

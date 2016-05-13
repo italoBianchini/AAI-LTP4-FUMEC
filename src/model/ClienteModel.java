@@ -204,6 +204,12 @@ public class ClienteModel {
         }
         return true;
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone(); 
+    }
+    
     
     
 

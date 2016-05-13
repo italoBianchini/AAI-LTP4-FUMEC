@@ -127,4 +127,41 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
         return excluiuCorretamente;
     }
 
+    @Override
+    public boolean alterar(ClienteModel clienteModel) throws PersistenciaException {
+        Connection connection;
+        boolean alterouCorretamente = false;
+
+        try {
+
+            connection = conexao.Conexao.getInstance().getConnection();
+
+            String sql = "UPDATE Clientes SET Nome = ? , Endereco = ?, Bairro = ?, Cidade = ?, Uf = ?, Cep = ?, Telefone = ?, e_mail = ?, data_cad_cliente = ?"
+                    + " WHERE codCliente = ? ";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, clienteModel.getNome());
+            statement.setString(2, clienteModel.getEndereco());
+            statement.setString(3, clienteModel.getBairro());
+            statement.setString(4, clienteModel.getCidade());
+            statement.setString(5, clienteModel.getUf());
+            statement.setString(6, clienteModel.getCep());
+            statement.setString(7, clienteModel.getTelefone());
+            statement.setString(8, clienteModel.getEmail());
+            statement.setDate(9, clienteModel.getDataDeCadastro());
+            statement.setInt(10, clienteModel.getCodigoCliente());
+
+            statement.executeUpdate();
+            alterouCorretamente = true;
+
+            connection.close();
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        
+        return alterouCorretamente;
+    }
+
 }
