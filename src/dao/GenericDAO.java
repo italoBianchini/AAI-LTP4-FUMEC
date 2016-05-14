@@ -1,6 +1,7 @@
 package dao;
 
 import Exception.PersistenciaException;
+import java.util.ArrayList;
 
 /**
  * A classe <b>GenericDAO</b> implementa metodos genericos data access. Pacote
@@ -22,4 +23,7 @@ public interface GenericDAO<genericObject> {
      
      boolean alterar(genericObject obj) throws  PersistenciaException;
 
+     ArrayList recuperarPorNome(String nome)throws  PersistenciaException;
+     
+     
 }

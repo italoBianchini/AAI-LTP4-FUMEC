@@ -2,10 +2,12 @@ package dao;
 
 import Exception.ClienteExcption;
 import Exception.PersistenciaException;
+import com.sun.org.apache.bcel.internal.generic.InstructionConstants;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import model.ClienteModel;
 
 /**
@@ -28,7 +30,6 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
         Connection connection;
 
         try {
-
             connection = Conexao.getInstance().getConnection();
 
             String sql = "INSERT INTO Clientes (codCliente, Nome, Endereco, Bairro, Cidade, Uf, Cep, Telefone, E_mail, data_Cad_Cliente)" + "VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -63,7 +64,6 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
         ClienteModel clienteModel = ClienteModel.CriarClienteVazio();
 
         try {
-
             connection = Conexao.getInstance().getConnection();
 
             String sql = SQL_BASE + "WHERE codCliente = ? ";
@@ -133,7 +133,6 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
         boolean alterouCorretamente = false;
 
         try {
-
             connection = conexao.Conexao.getInstance().getConnection();
 
             String sql = "UPDATE Clientes SET Nome = ? , Endereco = ?, Bairro = ?, Cidade = ?, Uf = ?, Cep = ?, Telefone = ?, e_mail = ?, data_cad_cliente = ?"
@@ -160,8 +159,53 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
         }
-        
+
         return alterouCorretamente;
+    }
+
+    @Override
+    public ArrayList recuperarPorNome(String nomeInformado) throws PersistenciaException {
+        Connection connection;
+        ArrayList<ClienteModel> listaClientes = new ArrayList<>();
+        ClienteModel clienteModel = ClienteModel.CriarClienteVazio();
+
+        try {
+            connection = conexao.Conexao.getInstance().getConnection();
+
+            String sql = SQL_BASE + "WHERE nome LIKE ? ORDER BY nome";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, "%" + nomeInformado.toUpperCase() + "%");
+            statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+
+                while (resultSet.next()) {
+
+                    clienteModel.setCodigoCliente(resultSet.getInt("codCliente"));
+                    clienteModel.setNome(resultSet.getString("Nome"));
+                    clienteModel.setEndereco(resultSet.getString("Endereco"));
+                    clienteModel.setBairro(resultSet.getString("Bairro"));
+                    clienteModel.setCidade(resultSet.getString("Cidade"));
+                    clienteModel.setUf(resultSet.getString("Uf"));
+                    clienteModel.setCep(resultSet.getString("Cep"));
+                    clienteModel.setTelefone(resultSet.getString("Telefone"));
+                    clienteModel.setEmail(resultSet.getString("E_mail"));
+                    clienteModel.setDataDeCadastro(resultSet.getDate("data_cad_cliente"));
+
+                    listaClientes.add(clienteModel);
+                }
+
+            } else {
+                listaClientes = null;
+                throw new ClienteExcption("Nenhum Cliente encontrado");
+            }
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        return listaClientes;
     }
 
 }
