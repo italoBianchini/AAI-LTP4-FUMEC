@@ -8,7 +8,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 
-
 /**
  * A Classe <b>ClienteDAOTest</b> é responsável pelos testes do
  * <b>ClienteModel</b>
@@ -125,7 +124,25 @@ public class ClienteDAOTest {
         }
 
     }
-    
-  
+
+    /**
+     * Test of recuperarPorNome method, of class ClienteDAO.
+     *
+     * @throws Exception.PersistenciaException
+     */
+    @Test
+    public void testRecuperarPorNome() throws PersistenciaException {
+
+        String nome = "te";
+        clienteDAO = new ClienteDAO();
+
+        try {
+            assertNotNull(clienteDAO.recuperarPorNome(nome));
+
+        } catch (Exception exception) {
+            throw new PersistenciaException(exception.getMessage());
+        }
+
+    }
 
 }

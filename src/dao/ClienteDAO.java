@@ -175,7 +175,9 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
             String sql = SQL_BASE + "WHERE nome LIKE ? ORDER BY nome";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, "%" + nomeInformado.toUpperCase() + "%");
+            
+            //TODO:Verificar como inserir um ignoreCase
+            statement.setString(1, "%" + nomeInformado + "%");
             statement.executeQuery();
             ResultSet resultSet = statement.executeQuery();
 
