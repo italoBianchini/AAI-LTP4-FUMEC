@@ -2,7 +2,6 @@ package dao;
 
 import Exception.ClienteExcption;
 import Exception.PersistenciaException;
-import com.sun.org.apache.bcel.internal.generic.InstructionConstants;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
