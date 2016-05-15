@@ -1,5 +1,8 @@
 package bo;
 
+import Exception.BusinessException;
+import Exception.PersistenciaException;
+import dao.ClienteDAO;
 import java.sql.Date;
 import model.ClienteModel;
 
@@ -12,7 +15,45 @@ import model.ClienteModel;
  */
 public class ClienteBO {
 
-    public boolean clienteValido(ClienteModel clienteModel) {
+    ClienteDAO clienteDAO = new ClienteDAO();
+
+    public boolean inserirCliente(ClienteModel clienteModel) throws BusinessException, PersistenciaException {
+
+        boolean inseriuCorretamente = false;
+
+        if (clienteValido(clienteModel)) {
+            inseriuCorretamente = clienteDAO.inserir(clienteModel);
+
+        } else {
+            throw new BusinessException("Cliente Inválido");
+        }
+        return inseriuCorretamente;
+    }
+
+    public boolean clienteValido(ClienteModel clienteModel) throws PersistenciaException {
+        boolean clienteNaoCadastrado;
+
+        try {
+            clienteNaoCadastrado = clienteAindaNaoCadastrado(clienteModel.getCodigoCliente());
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        return atributosValidos(clienteModel) && clienteNaoCadastrado;
+    }
+
+    public boolean clienteAindaNaoCadastrado(int codigoCliente) throws PersistenciaException {
+        ClienteModel clienteModel;
+
+        try {
+            clienteModel = clienteDAO.recuperarPorId(codigoCliente);
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        return clienteModel == null;
+    }
+
+    public boolean atributosValidos(ClienteModel clienteModel) {
 
         return nomeValido(clienteModel.getNome())
                 && enderecoValido(clienteModel.getEndereco())
@@ -20,8 +61,6 @@ public class ClienteBO {
                 && cidadeValido(clienteModel.getCidade())
                 && ufValido(clienteModel.getUf())
                 && cepValido(clienteModel.getCep())
-                && telefoneValido(clienteModel.getTelefone())
-                && emailValido(clienteModel.getEmail())
                 && dataValido(clienteModel.getDataDeCadastro());
     }
 
@@ -47,14 +86,6 @@ public class ClienteBO {
 
     public boolean cepValido(String cep) {
         return !cep.isEmpty();
-    }
-
-    public boolean telefoneValido(String telefone) {
-        return !telefone.isEmpty();
-    }
-
-    public boolean emailValido(String email) {
-        return !email.isEmpty();
     }
 
     //TODO: verificar na web maneira de se fazer isso 
