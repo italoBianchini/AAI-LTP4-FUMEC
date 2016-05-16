@@ -125,6 +125,7 @@ public class ClienteDAOTest {
         assertNotNull(clienteModel);
     }
 
+    @Ignore
     @Test
     public void testRecuperarPorIdInvalido() throws PersistenciaException {
 
@@ -141,7 +142,7 @@ public class ClienteDAOTest {
          assertNull(clienteModel);
     }
 
-    
+    @Ignore
     @Test
     public void testDelete() throws PersistenciaException {
         boolean resultado;
@@ -159,16 +160,15 @@ public class ClienteDAOTest {
 
     @Test
     public void testAlterar() throws PersistenciaException {
-
         clienteModel = ClienteModel.CriarClienteVazio();
-        clienteDAO = new ClienteDAO();
-
+       clienteBO = new ClienteBO();
+              
         try {
             clienteModel = clienteDAO.recuperarPorId(2);
             clienteModel.setNome(UtilTestes.criaPalavraAleatoria());
-
-            assertTrue(clienteDAO.alterar(clienteModel));
-
+        
+            assertTrue(clienteBO.alterarCliente(clienteModel));
+        
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
         }

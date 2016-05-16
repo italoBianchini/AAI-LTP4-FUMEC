@@ -72,6 +72,26 @@ public class ClienteBO {
         return deletouCorretamente;
     }
 
+    public boolean alterarCliente(ClienteModel clienteAlterado) throws BusinessException, PersistenciaException {
+        ClienteModel clienteOriginal;
+        boolean alterouCorretamente = false;
+
+        try {
+            clienteOriginal = clienteDAO.recuperarPorId(clienteAlterado.getCodigoCliente());
+
+            if (!clienteOriginal.equals(clienteAlterado)) {
+                alterouCorretamente = clienteDAO.alterar(clienteAlterado);
+            } else {
+                throw new BusinessException("Não existem alterações");
+            }
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+
+        return alterouCorretamente;
+    }
+
     public boolean clienteValido(ClienteModel clienteModel) throws PersistenciaException {
         boolean clienteNaoCadastrado;
 
