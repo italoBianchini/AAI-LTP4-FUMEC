@@ -20,20 +20,18 @@ public class ClienteDAOTest {
 
     private static ClienteModel clienteModel;
     private static ClienteBO clienteBO;
-    
+
     private static ClienteDAO clienteDAO;
 
     @Before
     public void setUp() {
     }
 
-    
     @Test
     public void testInserir() throws PersistenciaException {
 
         clienteModel = ClienteModel.CriarClienteVazio();
         clienteBO = new ClienteBO();
-        
 
         clienteModel.setCodigoCliente(UtilTestes.criaIdAleatorio());
         clienteModel.setNome("te");
@@ -56,7 +54,7 @@ public class ClienteDAOTest {
 
     }
 
-   
+    @Ignore
     @Test
     public void testInserirClienteJaCadastrado() throws PersistenciaException {
 
@@ -75,14 +73,14 @@ public class ClienteDAOTest {
         clienteModel.setDataDeCadastro(UtilTestes.criaDataCorrente());
 
         try {
-            assertFalse(clienteBO.inserirCliente(clienteModel)); 
-       
+            assertFalse(clienteBO.inserirCliente(clienteModel));
+
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
         }
 
     }
-    
+
     @Ignore
     @Test
     public void testInserirSemAtributosValidos() throws PersistenciaException {
@@ -103,51 +101,65 @@ public class ClienteDAOTest {
 
         try {
             assertFalse(clienteBO.inserirCliente(clienteModel));
-    
+
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
         }
 
     }
-    
-    
+
     @Test
     public void testRecuperarPorId() throws PersistenciaException {
 
         int idCLiente = 2;
-        clienteDAO = new ClienteDAO();
-
-        clienteModel = clienteDAO.recuperarPorId(idCLiente);
+        clienteBO = new ClienteBO();
 
         try {
 
-            assertNotNull(clienteModel);
+            clienteModel = clienteBO.recuperarClientePorId(idCLiente);
+            
+        } catch (Exception exception) {
+            throw new PersistenciaException(exception.getMessage());
+        }
+        
+        assertNotNull(clienteModel);
+    }
 
+    @Test
+    public void testRecuperarPorIdInvalido() throws PersistenciaException {
+
+        int idCLiente = 0;
+        clienteBO = new ClienteBO();
+
+        try {
+            clienteModel = clienteBO.recuperarClientePorId(idCLiente);
+        
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
         }
 
+         assertNull(clienteModel);
     }
 
-    
     @Ignore
     @Test
     public void testDelete() throws PersistenciaException {
-
+        boolean resultado;
+        
         clienteModel = ClienteModel.CriarClienteVazio();
         clienteModel.setCodigoCliente(45);
         clienteDAO = new ClienteDAO();
 
         try {
-            assertTrue(clienteDAO.delete(clienteModel));
-
+            resultado = clienteDAO.delete(clienteModel);
+            
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
         }
+        assertTrue(resultado);
 
     }
 
-    
     @Test
     public void testAlterar() throws PersistenciaException {
 
@@ -166,7 +178,6 @@ public class ClienteDAOTest {
 
     }
 
-    
     @Test
     public void testRecuperarPorNome() throws PersistenciaException {
 

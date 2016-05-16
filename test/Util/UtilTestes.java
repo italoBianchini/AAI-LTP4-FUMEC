@@ -8,7 +8,7 @@ public class UtilTestes {
     public static int criaIdAleatorio() {
 
         Random gerador = new Random();
-        int numeroGerado = gerador.nextInt(101);
+        int numeroGerado = gerador.nextInt(1001);
         return numeroGerado;
     }
 
