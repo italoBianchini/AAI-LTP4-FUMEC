@@ -19,7 +19,7 @@ public interface GenericDAO<genericObject> {
     
      Object recuperarPorId(int  id) throws PersistenciaException;
      
-     boolean delete(genericObject obj)throws  PersistenciaException;
+     boolean delete(int id)throws  PersistenciaException;
      
      boolean alterar(genericObject obj) throws  PersistenciaException;
 

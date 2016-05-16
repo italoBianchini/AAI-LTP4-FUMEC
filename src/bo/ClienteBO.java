@@ -40,7 +40,7 @@ public class ClienteBO {
         try {
             if (codigoValido(codigoCliente)) {
                 clienteModel = clienteDAO.recuperarPorId(codigoCliente);
-            
+
             } else {
                 throw new BusinessException("Código Inválido");
             }
@@ -49,6 +49,27 @@ public class ClienteBO {
             throw new PersistenciaException(e.getMessage(), e);
         }
         return clienteModel;
+    }
+
+    public boolean deletarCliente(int codigoCliente) throws BusinessException, PersistenciaException {
+        ClienteModel clienteModel;
+        Boolean deletouCorretamente = false;
+
+        try {
+            clienteModel = clienteDAO.recuperarPorId(codigoCliente);
+
+            if (clienteModel != null) {
+                deletouCorretamente = clienteDAO.delete(codigoCliente);
+
+            } else {
+                throw new BusinessException("Código Inválido");
+            }
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+
+        return deletouCorretamente;
     }
 
     public boolean clienteValido(ClienteModel clienteModel) throws PersistenciaException {

@@ -97,7 +97,7 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
     }
 
     @Override
-    public boolean delete(ClienteModel clienteModel) throws PersistenciaException {
+    public boolean delete(int codigoCliente) throws PersistenciaException {
         Connection connection;
         boolean excluiuCorretamente = false;
 
@@ -109,7 +109,7 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setInt(1, clienteModel.getCodigoCliente());
+            statement.setInt(1, codigoCliente);
 
             statement.executeUpdate();
 

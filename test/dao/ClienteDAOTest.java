@@ -141,17 +141,14 @@ public class ClienteDAOTest {
          assertNull(clienteModel);
     }
 
-    @Ignore
+    
     @Test
     public void testDelete() throws PersistenciaException {
         boolean resultado;
-        
-        clienteModel = ClienteModel.CriarClienteVazio();
-        clienteModel.setCodigoCliente(45);
-        clienteDAO = new ClienteDAO();
+        clienteBO = new ClienteBO();
 
         try {
-            resultado = clienteDAO.delete(clienteModel);
+            resultado = clienteBO.deletarCliente(23);
             
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
