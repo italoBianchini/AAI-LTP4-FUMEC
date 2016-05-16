@@ -18,16 +18,37 @@ public class ClienteBO {
     ClienteDAO clienteDAO = new ClienteDAO();
 
     public boolean inserirCliente(ClienteModel clienteModel) throws BusinessException, PersistenciaException {
-
         boolean inseriuCorretamente = false;
 
-        if (clienteValido(clienteModel)) {
-            inseriuCorretamente = clienteDAO.inserir(clienteModel);
+        try {
+            if (clienteValido(clienteModel)) {
+                inseriuCorretamente = clienteDAO.inserir(clienteModel);
 
-        } else {
-            throw new BusinessException("Cliente Inválido");
+            } else {
+                throw new BusinessException("Cliente Inválido");
+            }
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
         }
         return inseriuCorretamente;
+    }
+
+    public ClienteModel recuperarClientePorId(int codigoCliente) throws BusinessException, PersistenciaException {
+        ClienteModel clienteModel;
+
+        try {
+            if (codigoValido(codigoCliente)) {
+                clienteModel = clienteDAO.recuperarPorId(codigoCliente);
+            
+            } else {
+                throw new BusinessException("Código Inválido");
+            }
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        return clienteModel;
     }
 
     public boolean clienteValido(ClienteModel clienteModel) throws PersistenciaException {
@@ -55,13 +76,18 @@ public class ClienteBO {
 
     public boolean atributosValidos(ClienteModel clienteModel) {
 
-        return nomeValido(clienteModel.getNome())
+        return codigoValido(clienteModel.getCodigoCliente())
+                && nomeValido(clienteModel.getNome())
                 && enderecoValido(clienteModel.getEndereco())
                 && bairroValido(clienteModel.getBairro())
                 && cidadeValido(clienteModel.getCidade())
                 && ufValido(clienteModel.getUf())
                 && cepValido(clienteModel.getCep())
                 && dataValido(clienteModel.getDataDeCadastro());
+    }
+
+    public boolean codigoValido(int codigo) {
+        return codigo > 0;
     }
 
     public boolean nomeValido(String nome) {

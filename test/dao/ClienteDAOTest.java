@@ -2,6 +2,7 @@ package dao;
 
 import Exception.PersistenciaException;
 import Util.UtilTestes;
+import bo.ClienteBO;
 import model.ClienteModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,23 +19,21 @@ import org.junit.Ignore;
 public class ClienteDAOTest {
 
     private static ClienteModel clienteModel;
+    private static ClienteBO clienteBO;
+    
     private static ClienteDAO clienteDAO;
 
     @Before
     public void setUp() {
     }
 
-    /**
-     * Test of Inserir method, of class ClienteDAO.
-     *
-     * @throws Exception.PersistenciaException
-     *
-     */
+    
     @Test
     public void testInserir() throws PersistenciaException {
 
         clienteModel = ClienteModel.CriarClienteVazio();
-        clienteDAO = new ClienteDAO();
+        clienteBO = new ClienteBO();
+        
 
         clienteModel.setCodigoCliente(UtilTestes.criaIdAleatorio());
         clienteModel.setNome("te");
@@ -49,7 +48,7 @@ public class ClienteDAOTest {
 
         try {
 
-            assertTrue(clienteDAO.inserir(clienteModel));
+            assertTrue(clienteBO.inserirCliente(clienteModel));
 
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
@@ -57,11 +56,61 @@ public class ClienteDAOTest {
 
     }
 
-    /**
-     * Test of recuperarPorId method, of class ClienteDAO.
-     *
-     * @throws Exception.PersistenciaException
-     */
+   
+    @Test
+    public void testInserirClienteJaCadastrado() throws PersistenciaException {
+
+        clienteModel = ClienteModel.CriarClienteVazio();
+        clienteBO = new ClienteBO();
+
+        clienteModel.setCodigoCliente(2);
+        clienteModel.setNome("te");
+        clienteModel.setEndereco("te");
+        clienteModel.setBairro("te");
+        clienteModel.setCidade("te");
+        clienteModel.setUf("te");
+        clienteModel.setCep("te");
+        clienteModel.setTelefone("te");
+        clienteModel.setEmail("te");
+        clienteModel.setDataDeCadastro(UtilTestes.criaDataCorrente());
+
+        try {
+            assertFalse(clienteBO.inserirCliente(clienteModel)); 
+       
+        } catch (Exception exception) {
+            throw new PersistenciaException(exception.getMessage());
+        }
+
+    }
+    
+    @Ignore
+    @Test
+    public void testInserirSemAtributosValidos() throws PersistenciaException {
+
+        clienteModel = ClienteModel.CriarClienteVazio();
+        clienteBO = new ClienteBO();
+
+        clienteModel.setCodigoCliente(UtilTestes.criaIdAleatorio());
+        clienteModel.setNome("");
+        clienteModel.setEndereco("te");
+        clienteModel.setBairro("te");
+        clienteModel.setCidade("");
+        clienteModel.setUf("te");
+        clienteModel.setCep("te");
+        clienteModel.setTelefone("te");
+        clienteModel.setEmail("te");
+        clienteModel.setDataDeCadastro(UtilTestes.criaDataCorrente());
+
+        try {
+            assertFalse(clienteBO.inserirCliente(clienteModel));
+    
+        } catch (Exception exception) {
+            throw new PersistenciaException(exception.getMessage());
+        }
+
+    }
+    
+    
     @Test
     public void testRecuperarPorId() throws PersistenciaException {
 
@@ -80,11 +129,7 @@ public class ClienteDAOTest {
 
     }
 
-    /**
-     * Test of delete method, of class ClienteDAO.
-     *
-     * @throws Exception.PersistenciaException
-     */
+    
     @Ignore
     @Test
     public void testDelete() throws PersistenciaException {
@@ -102,11 +147,7 @@ public class ClienteDAOTest {
 
     }
 
-    /**
-     * Test of alterar method, of class ClienteDAO.
-     *
-     * @throws Exception.PersistenciaException
-     */
+    
     @Test
     public void testAlterar() throws PersistenciaException {
 
@@ -125,11 +166,7 @@ public class ClienteDAOTest {
 
     }
 
-    /**
-     * Test of recuperarPorNome method, of class ClienteDAO.
-     *
-     * @throws Exception.PersistenciaException
-     */
+    
     @Test
     public void testRecuperarPorNome() throws PersistenciaException {
 

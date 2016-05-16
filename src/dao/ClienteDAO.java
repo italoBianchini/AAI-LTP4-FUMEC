@@ -85,18 +85,15 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
                 clienteModel.setTelefone(resultSet.getString("Telefone"));
                 clienteModel.setEmail(resultSet.getString("E_mail"));
                 clienteModel.setDataDeCadastro(resultSet.getDate("data_cad_cliente"));
-            } else {
-
-                throw new ClienteExcption("Cliente não cadastrado!");
+            }else{
+                clienteModel = null;
             }
-
             connection.close();
 
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
         }
         return clienteModel;
-
     }
 
     @Override
@@ -174,7 +171,7 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
             String sql = SQL_BASE + "WHERE nome LIKE ? ORDER BY nome";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            
+
             //TODO:Verificar como inserir um ignoreCase
             statement.setString(1, "%" + nomeInformado + "%");
             statement.executeQuery();
