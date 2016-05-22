@@ -85,7 +85,7 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
                 clienteModel.setTelefone(resultSet.getString("Telefone"));
                 clienteModel.setEmail(resultSet.getString("E_mail"));
                 clienteModel.setDataDeCadastro(resultSet.getDate("data_cad_cliente"));
-            }else{
+            } else {
                 clienteModel = null;
             }
             connection.close();
@@ -153,9 +153,11 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
             connection.close();
 
         } catch (Exception e) {
-            throw new PersistenciaException(e.getMessage(), e);
-        }
 
+            System.out.println(e.getMessage());
+            throw new PersistenciaException(e.getMessage());
+
+        }
         return alterouCorretamente;
     }
 

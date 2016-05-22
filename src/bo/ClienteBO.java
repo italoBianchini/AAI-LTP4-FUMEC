@@ -4,6 +4,7 @@ import Exception.BusinessException;
 import Exception.PersistenciaException;
 import dao.ClienteDAO;
 import java.sql.Date;
+import java.util.ArrayList;
 import model.ClienteModel;
 
 /**
@@ -79,7 +80,8 @@ public class ClienteBO {
         try {
             clienteOriginal = clienteDAO.recuperarPorId(clienteAlterado.getCodigoCliente());
 
-            if (!clienteOriginal.equals(clienteAlterado)) {
+            if (clienteOriginal.equals(clienteAlterado)) {
+
                 alterouCorretamente = clienteDAO.alterar(clienteAlterado);
             } else {
                 throw new BusinessException("Não existem alterações");
@@ -90,6 +92,27 @@ public class ClienteBO {
         }
 
         return alterouCorretamente;
+    }
+
+    public ArrayList recuperarClientePorNome(String nome) throws BusinessException, PersistenciaException {
+        ArrayList listaDeClientes = new ArrayList<>();
+
+        try {
+
+            if (!nomeValido(nome)) {
+                throw new BusinessException("Nome Inválido");
+            }
+
+            listaDeClientes = clienteDAO.recuperarPorNome(nome);
+
+            if (listaDeClientes.isEmpty()) {
+                throw new BusinessException("Nenhum Cliente Encontrado");
+            }
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        return listaDeClientes;
     }
 
     public boolean clienteValido(ClienteModel clienteModel) throws PersistenciaException {
@@ -159,4 +182,26 @@ public class ClienteBO {
     public boolean dataValido(Date data) {
         return true;
     }
+
+    public void main(String[] Args) throws PersistenciaException {
+
+        Date data = new Date(System.currentTimeMillis());
+
+        ClienteModel cliente = ClienteModel.CriarClienteVazio();
+
+        cliente.setCodigoCliente(2);
+        cliente.setNome("sasasasasasasa");
+        cliente.setEndereco("te");
+        cliente.setBairro("te");
+        cliente.setCidade("cidadeTeste");
+        cliente.setUf("UfTeste");
+        cliente.setCep("cepTeste");
+        cliente.setTelefone("telefoneTeste");
+        cliente.setEmail("emailTeste");
+        cliente.setDataDeCadastro(data);
+
+        boolean resultado = alterarCliente(cliente);
+
+    }
+
 }

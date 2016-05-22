@@ -117,11 +117,11 @@ public class ClienteDAOTest {
         try {
 
             clienteModel = clienteBO.recuperarClientePorId(idCLiente);
-            
+
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
         }
-        
+
         assertNotNull(clienteModel);
     }
 
@@ -134,12 +134,12 @@ public class ClienteDAOTest {
 
         try {
             clienteModel = clienteBO.recuperarClientePorId(idCLiente);
-        
+
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
         }
 
-         assertNull(clienteModel);
+        assertNull(clienteModel);
     }
 
     @Ignore
@@ -150,7 +150,7 @@ public class ClienteDAOTest {
 
         try {
             resultado = clienteBO.deletarCliente(23);
-            
+
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
         }
@@ -161,28 +161,27 @@ public class ClienteDAOTest {
     @Test
     public void testAlterar() throws PersistenciaException {
         clienteModel = ClienteModel.CriarClienteVazio();
-       clienteBO = new ClienteBO();
-              
+        clienteBO = new ClienteBO();
+
         try {
             clienteModel = clienteDAO.recuperarPorId(2);
-            clienteModel.setNome(UtilTestes.criaPalavraAleatoria());
-        
+            clienteModel.setNome("Italo");
+
             assertTrue(clienteBO.alterarCliente(clienteModel));
-        
-        } catch (Exception exception) {
-            throw new PersistenciaException(exception.getMessage());
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage());
         }
 
     }
 
     @Test
     public void testRecuperarPorNome() throws PersistenciaException {
-
         String nome = "te";
-        clienteDAO = new ClienteDAO();
+        clienteBO = new ClienteBO();
 
         try {
-            assertNotNull(clienteDAO.recuperarPorNome(nome));
+            assertNotNull(clienteBO.recuperarClientePorNome(nome));
 
         } catch (Exception exception) {
             throw new PersistenciaException(exception.getMessage());
