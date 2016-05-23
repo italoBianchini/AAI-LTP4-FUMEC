@@ -183,7 +183,7 @@ public class ClienteBO {
         return true;
     }
 
-    public void main(String[] Args) throws PersistenciaException {
+    public static void main(String[] Args) throws PersistenciaException {
 
         Date data = new Date(System.currentTimeMillis());
 
@@ -200,7 +200,7 @@ public class ClienteBO {
         cliente.setEmail("emailTeste");
         cliente.setDataDeCadastro(data);
 
-        boolean resultado = alterarCliente(cliente);
+        boolean resultado = new ClienteBO().alterarCliente(cliente);
 
     }
 
