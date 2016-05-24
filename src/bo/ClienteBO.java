@@ -80,12 +80,12 @@ public class ClienteBO {
         try {
             clienteOriginal = clienteDAO.recuperarPorId(clienteAlterado.getCodigoCliente());
 
-            if (clienteOriginal.equals(clienteAlterado)) {
-
+          // if (clienteOriginal != clienteAlterado) {
                 alterouCorretamente = clienteDAO.alterar(clienteAlterado);
-            } else {
-                throw new BusinessException("Não existem alterações");
-            }
+
+//            } else {
+//                throw new BusinessException("Não existem alterações");
+//            }
 
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
@@ -184,24 +184,7 @@ public class ClienteBO {
     }
 
     public static void main(String[] Args) throws PersistenciaException {
-
-        Date data = new Date(System.currentTimeMillis());
-
-        ClienteModel cliente = ClienteModel.CriarClienteVazio();
-
-        cliente.setCodigoCliente(2);
-        cliente.setNome("sasasasasasasa");
-        cliente.setEndereco("te");
-        cliente.setBairro("te");
-        cliente.setCidade("cidadeTeste");
-        cliente.setUf("UfTeste");
-        cliente.setCep("cepTeste");
-        cliente.setTelefone("telefoneTeste");
-        cliente.setEmail("emailTeste");
-        cliente.setDataDeCadastro(data);
-
-        boolean resultado = new ClienteBO().alterarCliente(cliente);
-
+        
     }
 
 }

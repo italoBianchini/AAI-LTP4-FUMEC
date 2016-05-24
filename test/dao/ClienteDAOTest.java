@@ -89,7 +89,7 @@ public class ClienteDAOTest {
         clienteBO = new ClienteBO();
 
         clienteModel.setCodigoCliente(UtilTestes.criaIdAleatorio());
-        clienteModel.setNome("");
+        clienteModel.setNome("tes");
         clienteModel.setEndereco("te");
         clienteModel.setBairro("te");
         clienteModel.setCidade("");
@@ -160,14 +160,23 @@ public class ClienteDAOTest {
 
     @Test
     public void testAlterar() throws PersistenciaException {
-        clienteModel = ClienteModel.CriarClienteVazio();
         clienteBO = new ClienteBO();
 
         try {
-            clienteModel = clienteDAO.recuperarPorId(2);
-            clienteModel.setNome("Italo");
+            ClienteModel cliente = ClienteModel.CriarClienteVazio();
+            
+            cliente.setCodigoCliente(2);
+            cliente.setNome("sas2");
+            cliente.setEndereco("te");
+            cliente.setBairro("te");
+            cliente.setCidade("cida");
+            cliente.setUf("i");
+            cliente.setCep("33");
+            cliente.setTelefone("te");
+            cliente.setEmail("te");
+            cliente.setDataDeCadastro(UtilTestes.criaDataCorrente());
 
-            assertTrue(clienteBO.alterarCliente(clienteModel));
+            assertTrue(clienteBO.alterarCliente(cliente));
 
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage());
