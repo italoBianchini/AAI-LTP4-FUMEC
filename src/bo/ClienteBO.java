@@ -80,12 +80,12 @@ public class ClienteBO {
         try {
             clienteOriginal = clienteDAO.recuperarPorId(clienteAlterado.getCodigoCliente());
 
-          // if (clienteOriginal != clienteAlterado) {
+           if (clienteOriginal != clienteAlterado) {
                 alterouCorretamente = clienteDAO.alterar(clienteAlterado);
 
-//            } else {
-//                throw new BusinessException("Não existem alterações");
-//            }
+            } else {
+                throw new BusinessException("Não existem alterações");
+            }
 
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
@@ -186,5 +186,4 @@ public class ClienteBO {
     public static void main(String[] Args) throws PersistenciaException {
         
     }
-
 }

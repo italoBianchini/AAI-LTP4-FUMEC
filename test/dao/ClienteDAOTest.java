@@ -166,7 +166,7 @@ public class ClienteDAOTest {
             ClienteModel cliente = ClienteModel.CriarClienteVazio();
             
             cliente.setCodigoCliente(2);
-            cliente.setNome("sas2");
+            cliente.setNome(UtilTestes.criaPalavraAleatoria());
             cliente.setEndereco("te");
             cliente.setBairro("te");
             cliente.setCidade("cida");
