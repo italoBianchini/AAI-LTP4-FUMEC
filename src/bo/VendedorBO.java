@@ -35,7 +35,7 @@ public class VendedorBO {
         return inseriuCorretamente;
     }
 
-       public VendedorModel recuperarVendedorPorId(int codigoVendedor) throws BusinessException, PersistenciaException {
+    public VendedorModel recuperarVendedorPorId(int codigoVendedor) throws BusinessException, PersistenciaException {
         VendedorModel vendedorModel;
 
         try {
@@ -51,8 +51,8 @@ public class VendedorBO {
         }
         return vendedorModel;
     }
-    
-       public boolean deletarCliente(int codigoVendedor) throws BusinessException, PersistenciaException {
+
+    public boolean deletarCliente(int codigoVendedor) throws BusinessException, PersistenciaException {
         VendedorModel vendedorModel;
         Boolean deletouCorretamente = false;
 
@@ -71,15 +71,15 @@ public class VendedorBO {
         }
         return deletouCorretamente;
     }
-    
-     public boolean alterarCliente(VendedorModel vendedorAlterado) throws BusinessException, PersistenciaException {
+
+    public boolean alterarCliente(VendedorModel vendedorAlterado) throws BusinessException, PersistenciaException {
         VendedorModel vendedorOriginal;
         boolean alterouCorretamente = false;
 
         try {
             vendedorOriginal = vendedorDAO.recuperarPorId(vendedorAlterado.getCodigoVendedor());
 
-           if (vendedorOriginal != vendedorAlterado) {
+            if (vendedorOriginal != vendedorAlterado) {
                 alterouCorretamente = vendedorDAO.alterar(vendedorAlterado);
 
             } else {
@@ -92,9 +92,8 @@ public class VendedorBO {
 
         return alterouCorretamente;
     }
-    
-     
-      public ArrayList recuperarVendedorPorNome(String nomeVendedor) throws BusinessException, PersistenciaException {
+
+    public ArrayList recuperarVendedorPorNome(String nomeVendedor) throws BusinessException, PersistenciaException {
         ArrayList listaDeVendedores = new ArrayList<>();
 
         try {
@@ -114,7 +113,7 @@ public class VendedorBO {
         }
         return listaDeVendedores;
     }
-    
+
     public boolean vendedorValido(VendedorModel vendedorModel) throws PersistenciaException {
         boolean vendedorNaoCadastrado = false;
 
