@@ -35,7 +35,7 @@ public class VendedorDAO implements GenericDAO<VendedorModel> {
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setInt(1, vendedorModel.getCodVendedor());
+            statement.setInt(1, vendedorModel.getCodigoVendedor());
             statement.setString(2, vendedorModel.getNomeVendedor());
             statement.setDate(3, vendedorModel.getDataCadVendedor());
 
@@ -69,7 +69,7 @@ public class VendedorDAO implements GenericDAO<VendedorModel> {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                vendedorModel.setCodVendedor(codigoVendedor);
+                vendedorModel.setCodigoVendedor(codigoVendedor);
                 vendedorModel.setNomeVendedor(resultSet.getString("nome_vendedor"));
                 vendedorModel.setDataCadVendedor(resultSet.getDate("data_cad_vendedor"));
                 
@@ -124,7 +124,7 @@ public class VendedorDAO implements GenericDAO<VendedorModel> {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, vendedorModel.getNomeVendedor());
             statement.setDate(2, vendedorModel.getDataCadVendedor());
-            statement.setInt(3, vendedorModel.getCodVendedor());
+            statement.setInt(3, vendedorModel.getCodigoVendedor());
 
             statement.executeUpdate();
             alterouCorretamente = true;
@@ -161,7 +161,7 @@ public class VendedorDAO implements GenericDAO<VendedorModel> {
 
                 while (resultSet.next()) {
 
-                    vendedorModel.setCodVendedor(resultSet.getInt("cod_vendedor"));
+                    vendedorModel.setCodigoVendedor(resultSet.getInt("cod_vendedor"));
                     vendedorModel.setNomeVendedor(resultSet.getString("nome_vendedor"));
                     vendedorModel.setDataCadVendedor(resultSet.getDate("data_cad_vendedor"));
                     
