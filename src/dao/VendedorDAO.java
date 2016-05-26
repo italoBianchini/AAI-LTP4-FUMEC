@@ -149,7 +149,7 @@ public class VendedorDAO implements GenericDAO<VendedorModel> {
         try {
             connection = conexao.Conexao.getInstance().getConnection();
 
-            String sql = SQL_BASE + "WHERE UPPER(nome_vendedor) LIKE ? ORDER BY nome_vendedor";
+            String sql = SQL_BASE + "WHERE nome_vendedor LIKE ? ORDER BY nome_vendedor";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             

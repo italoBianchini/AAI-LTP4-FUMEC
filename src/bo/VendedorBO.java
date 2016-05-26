@@ -10,7 +10,7 @@ package bo;
  */
 public class VendedorBO {
     
-    public 
+
     
     
     

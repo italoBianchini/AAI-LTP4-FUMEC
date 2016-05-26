@@ -170,7 +170,7 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
         try {
             connection = conexao.Conexao.getInstance().getConnection();
 
-            String sql = SQL_BASE + "WHERE UPPER(nome) LIKE ? ORDER BY nome";
+            String sql = SQL_BASE + "WHERE nome LIKE ? ORDER BY nome";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             
