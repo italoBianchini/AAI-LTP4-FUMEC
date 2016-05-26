@@ -13,7 +13,7 @@ import java.sql.Date;
 public class VendedorModel {
 
     private Integer codVendedor;
-    private String vendedor;
+    private String NomeVendedor;
     private Date dataCadVendedor;
 
     public static VendedorModel CriaVendedorVazio() {
@@ -32,12 +32,12 @@ public class VendedorModel {
         this.codVendedor = codVendedor;
     }
 
-    public String getVendedor() {
-        return vendedor;
+    public String getNomeVendedor() {
+        return NomeVendedor;
     }
 
-    public void setVendedor(String vendedor) {
-        this.vendedor = vendedor;
+    public void setNomeVendedor(String vendedor) {
+        this.NomeVendedor = vendedor;
     }
 
     public Date getDataCadVendedor() {
@@ -48,4 +48,10 @@ public class VendedorModel {
         this.dataCadVendedor = dataCadVendedor;
     }
 
+    @Override
+    public String toString() {
+        return "VendedorModel{" + "codVendedor=" + codVendedor + ", NomeVendedor=" + NomeVendedor + ", dataCadVendedor=" + dataCadVendedor + '}';
+    }
+
+    
 }

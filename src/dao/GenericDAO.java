@@ -4,8 +4,8 @@ import Exception.PersistenciaException;
 import java.util.ArrayList;
 
 /**
- * A classe <b>GenericDAO</b> implementa metodos genericos data access. Pacote
- * dao.
+ * A classe <b>GenericDAO</b> implementa metodos genericos data access.
+ * Pacote dao.
  *
  * @author Ítalo Bianchini
  * @param <genericObject>
@@ -14,16 +14,13 @@ import java.util.ArrayList;
  */
 public interface GenericDAO<genericObject> {
 
-   
-    boolean inserir(genericObject obj) throws PersistenciaException;
-    
-     Object recuperarPorId(int  id) throws PersistenciaException;
+    boolean inserir(genericObject obj) throws PersistenciaException;    
      
-     boolean delete(int id)throws  PersistenciaException;
+    Object recuperarPorId(int  id) throws PersistenciaException;
+     
+     boolean delete(int id)throws  PersistenciaException; 
      
      boolean alterar(genericObject obj) throws  PersistenciaException;
 
      ArrayList recuperarPorNome(String nome)throws  PersistenciaException;
-     
-     
 }
