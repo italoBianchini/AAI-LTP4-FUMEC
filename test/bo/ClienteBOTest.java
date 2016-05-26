@@ -1,8 +1,9 @@
-package dao;
+package bo;
 
 import Exception.PersistenciaException;
 import Util.UtilTestes;
 import bo.ClienteBO;
+import dao.ClienteDAO;
 import model.ClienteModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import org.junit.Ignore;
  *
  * @author Ítalo
  */
-public class ClienteDAOTest {
+public class ClienteBOTest {
 
     private static ClienteModel clienteModel;
     private static ClienteBO clienteBO;
