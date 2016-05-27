@@ -20,6 +20,11 @@ public class VendedorBOTest {
 
     @Test
     public void testInserirCliente() throws Exception {
+        
+        
+        
+        
+        
     }
 
     @Test

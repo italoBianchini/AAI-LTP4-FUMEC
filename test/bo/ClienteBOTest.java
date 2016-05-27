@@ -2,7 +2,6 @@ package bo;
 
 import Exception.PersistenciaException;
 import Util.UtilTestes;
-import bo.ClienteBO;
 import dao.ClienteDAO;
 import model.ClienteModel;
 import org.junit.Before;
