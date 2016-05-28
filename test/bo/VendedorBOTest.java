@@ -23,12 +23,13 @@ public class VendedorBOTest {
     public void setUp() {
     }
 
-    @Ignore
+   
     @Test
     public void testInserirVendedor() throws Exception {
         VendedorModel vendedorModel = UtilTestes.criaVendedorAleatorio();
 
         try {
+            vendedorModel.setCodigoVendedor(1);
             assertTrue(vendedorBO.inserirVendedor(vendedorModel));
 
         } catch (Exception e) {
@@ -38,11 +39,12 @@ public class VendedorBOTest {
 
     }
 
+    @Ignore
     @Test
     public void testRecuperarVendedorPorId() throws Exception {
 
         try {
-            assertNotNull(vendedorBO.recuperarVendedorPorId(3));
+            assertNotNull(vendedorBO.recuperarVendedorPorId(1));
 
         } catch (Exception e) {
             System.out.println(e);

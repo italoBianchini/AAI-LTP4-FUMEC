@@ -157,19 +157,19 @@ public class VendedorBO {
     public boolean dataValido(Date data) {
         return true;
     }
-
+    
     public static void main(String[] args) {
-
+        
         try {
-
-            VendedorModel vendedorModel = new VendedorBO().recuperarVendedorPorId(3);
-
-            System.out.println(vendedorModel.toString());
-
+            boolean teste = new VendedorBO().deletarVendedor(1);
+            System.out.println(teste);
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        
+        
+        
+        
     }
 
 }

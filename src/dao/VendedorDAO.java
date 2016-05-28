@@ -93,7 +93,7 @@ public class VendedorDAO implements GenericDAO<VendedorModel> {
 
             connection = conexao.Conexao.getInstance().getConnection();
 
-            String sql = "DELETE FROM Vendedores WHERE codVendedor = ? ";
+            String sql = "DELETE FROM Vendedores WHERE cod_Vendedor = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -119,7 +119,7 @@ public class VendedorDAO implements GenericDAO<VendedorModel> {
         try {
             connection = conexao.Conexao.getInstance().getConnection();
 
-            String sql = "UPDATE Vendedores SET nome_vendedor = ? , data_cad_vendedor = ?  WHERE codVendedor = ? ";
+            String sql = "UPDATE Vendedores SET nome_vendedor = ? , data_cad_vendedor = ?  WHERE cod_Vendedor = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, vendedorModel.getNomeVendedor());
