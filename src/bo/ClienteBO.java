@@ -182,8 +182,4 @@ public class ClienteBO {
     public boolean dataValido(Date data) {
         return true;
     }
-
-    public static void main(String[] Args) throws PersistenciaException {
-        
-    }
 }

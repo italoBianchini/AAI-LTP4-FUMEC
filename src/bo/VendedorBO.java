@@ -18,7 +18,7 @@ public class VendedorBO {
 
     VendedorDAO vendedorDAO = new VendedorDAO();
 
-    public boolean inserirCliente(VendedorModel vendedorModel) throws BusinessException, PersistenciaException {
+    public boolean inserirVendedor(VendedorModel vendedorModel) throws BusinessException, PersistenciaException {
         boolean inseriuCorretamente = false;
 
         try {
@@ -26,7 +26,7 @@ public class VendedorBO {
                 inseriuCorretamente = vendedorDAO.inserir(vendedorModel);
 
             } else {
-                throw new BusinessException("Cliente Inválido");
+                throw new BusinessException("Vendedor Inválido");
             }
 
         } catch (Exception e) {
@@ -118,7 +118,7 @@ public class VendedorBO {
         boolean vendedorNaoCadastrado = false;
 
         try {
-            vendedorNaoCadastrado = clienteAindaNaoCadastrado(vendedorModel.getCodigoVendedor());
+            vendedorNaoCadastrado = vendedorAindaNaoCadastrado(vendedorModel.getCodigoVendedor());
 
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
@@ -126,7 +126,7 @@ public class VendedorBO {
         return atributosValidos(vendedorModel) && vendedorNaoCadastrado;
     }
 
-    public boolean clienteAindaNaoCadastrado(int codigoVendedor) throws PersistenciaException {
+    public boolean vendedorAindaNaoCadastrado(int codigoVendedor) throws PersistenciaException {
         VendedorModel vendedorModel;
 
         try {
@@ -157,4 +157,19 @@ public class VendedorBO {
     public boolean dataValido(Date data) {
         return true;
     }
+
+    public static void main(String[] args) {
+
+        try {
+
+            VendedorModel vendedorModel = new VendedorBO().recuperarVendedorPorId(3);
+
+            System.out.println(vendedorModel.toString());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
 }

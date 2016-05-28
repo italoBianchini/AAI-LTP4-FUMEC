@@ -1,34 +1,55 @@
-
 package bo;
 
+import Exception.PersistenciaException;
+import Util.UtilTestes;
+import model.VendedorModel;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
  * @author Ítalo
  */
 public class VendedorBOTest {
-    
+
+    VendedorBO vendedorBO = new VendedorBO();
+
     public VendedorBOTest() {
     }
-    
+
     @Before
     public void setUp() {
     }
 
+    
     @Test
-    public void testInserirCliente() throws Exception {
-        
-        
-        
-        
-        
+    public void testInserirVendedor() throws Exception {
+        VendedorModel vendedorModel = UtilTestes.criaVendedorAleatorio();
+
+        try {
+            assertTrue(vendedorBO.inserirVendedor(vendedorModel));
+
+        } catch (Exception e) {
+            System.err.println(e);
+            throw new PersistenciaException(e.getMessage());
+        }
+
     }
 
     @Test
     public void testRecuperarVendedorPorId() throws Exception {
+        
+        try {
+            assertNotNull(vendedorBO.recuperarVendedorPorId(3));
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+                
+        
     }
 
     @Test
@@ -66,5 +87,5 @@ public class VendedorBOTest {
     @Test
     public void testDataValido() {
     }
-    
+
 }

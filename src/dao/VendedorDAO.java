@@ -31,7 +31,7 @@ public class VendedorDAO implements GenericDAO<VendedorModel> {
         try {
             connection = Conexao.getInstance().getConnection();
 
-            String sql = "INSERT INTO Vendedores (cod_vendedor, nome_vendedor, data_cad_vendedor )" + "VALUES(?,?,?)";
+            String sql = "INSERT INTO Vendedores (cod_vendedor, nome_vendedor, data_cad_vendedor ) VALUES(?,?,?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -60,7 +60,7 @@ public class VendedorDAO implements GenericDAO<VendedorModel> {
         try {
             connection = Conexao.getInstance().getConnection();
 
-            String sql =  SQL_BASE + "WHERE codVendedor = ? ";
+            String sql =  SQL_BASE + " WHERE cod_vendedor = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
