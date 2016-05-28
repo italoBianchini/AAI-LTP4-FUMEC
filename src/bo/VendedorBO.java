@@ -52,7 +52,7 @@ public class VendedorBO {
         return vendedorModel;
     }
 
-    public boolean deletarCliente(int codigoVendedor) throws BusinessException, PersistenciaException {
+    public boolean deletarVendedor(int codigoVendedor) throws BusinessException, PersistenciaException {
         VendedorModel vendedorModel;
         Boolean deletouCorretamente = false;
 

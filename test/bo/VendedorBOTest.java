@@ -23,7 +23,7 @@ public class VendedorBOTest {
     public void setUp() {
     }
 
-    
+    @Ignore
     @Test
     public void testInserirVendedor() throws Exception {
         VendedorModel vendedorModel = UtilTestes.criaVendedorAleatorio();
@@ -40,20 +40,25 @@ public class VendedorBOTest {
 
     @Test
     public void testRecuperarVendedorPorId() throws Exception {
-        
+
         try {
             assertNotNull(vendedorBO.recuperarVendedorPorId(3));
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
-        
-                
-        
     }
 
     @Test
     public void testDeletarCliente() throws Exception {
+
+        try {
+            assertTrue(vendedorBO.deletarVendedor(1));
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        
+        }
     }
 
     @Test
