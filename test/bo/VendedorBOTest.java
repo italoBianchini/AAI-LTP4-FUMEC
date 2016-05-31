@@ -2,6 +2,7 @@ package bo;
 
 import Exception.PersistenciaException;
 import Util.UtilTestes;
+import java.util.ArrayList;
 import model.VendedorModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,6 @@ public class VendedorBOTest {
     public void setUp() {
     }
 
-   
     @Test
     public void testInserirVendedor() throws Exception {
         VendedorModel vendedorModel = UtilTestes.criaVendedorAleatorio();
@@ -56,43 +56,33 @@ public class VendedorBOTest {
 
         try {
             assertTrue(vendedorBO.deletarVendedor(1));
-            
+
         } catch (Exception e) {
             System.out.println(e);
-        
+
         }
     }
 
     @Test
     public void testAlterarCliente() throws Exception {
+        boolean alterouCorretamente;
+        VendedorModel vendedorModel = UtilTestes.criaVendedorAleatorio();
+        try {
+            assertTrue(vendedorBO.alterarCliente(vendedorModel));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Test
     public void testRecuperarVendedorPorNome() throws Exception {
-    }
+        String nome = "italo";
+        try {
+            assertNotNull(vendedorBO.recuperarVendedorPorNome(nome));
 
-    @Test
-    public void testVendedorValido() throws Exception {
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
-
-    @Test
-    public void testClienteAindaNaoCadastrado() throws Exception {
-    }
-
-    @Test
-    public void testAtributosValidos() {
-    }
-
-    @Test
-    public void testCodigoValido() {
-    }
-
-    @Test
-    public void testNomeValido() {
-    }
-
-    @Test
-    public void testDataValido() {
-    }
-
 }
