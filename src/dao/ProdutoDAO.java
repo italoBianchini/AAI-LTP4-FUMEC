@@ -37,7 +37,7 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
 
             statement.setInt(1, produtoModel.getCodigoProduto());
             statement.setString(2, produtoModel.getNomeProduto());
-            statement.setInt(3, produtoModel.getCodUnidade());
+            statement.setInt(3, produtoModel.getCodigoUnidade());
             statement.setDouble(4, produtoModel.getPrecoProduto());
             statement.setDate(5, produtoModel.getDataPreco());
 
@@ -54,7 +54,7 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
     }
 
     @Override
-    public Object recuperarPorId(int idProduto) throws PersistenciaException {
+    public ProdutoModel recuperarPorId(int idProduto) throws PersistenciaException {
         Connection connection;
         ProdutoModel produtoModel = ProdutoModel.CriarProdutoVazio();
 
@@ -73,7 +73,7 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
 
                 produtoModel.setCodigoProduto(idProduto);
                 produtoModel.setNomeProduto(resultSet.getString("Nome"));
-                produtoModel.setCodUnidade(resultSet.getInt("codUnidade"));
+                produtoModel.setCodigoUnidade(resultSet.getInt("codUnidade"));
                 produtoModel.setPrecoProduto(resultSet.getDouble("preco"));
                 produtoModel.setDataPreco(resultSet.getDate("dataPreco"));
 
@@ -129,7 +129,7 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
             PreparedStatement statement = connection.prepareStatement(sql);
 
             statement.setString(1, produtoModel.getNomeProduto());
-            statement.setInt(2, produtoModel.getCodUnidade());
+            statement.setInt(2, produtoModel.getCodigoUnidade());
             statement.setDouble(3, produtoModel.getPrecoProduto());
             statement.setDate(4, produtoModel.getDataPreco());
 
@@ -166,7 +166,7 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
                 while (resultSet.next()) {
                     produtoModel.setCodigoProduto(resultSet.getInt("codProduto"));
                     produtoModel.setNomeProduto(resultSet.getString("Produto"));
-                    produtoModel.setCodUnidade(resultSet.getInt("codUnidade"));
+                    produtoModel.setCodigoUnidade(resultSet.getInt("codUnidade"));
                     produtoModel.setPrecoProduto(resultSet.getDouble("preco"));
                     produtoModel.setDataPreco(resultSet.getDate("dataPreco"));
                     

@@ -156,20 +156,5 @@ public class VendedorBO {
     //TODO: verificar na web maneira de se fazer isso 
     public boolean dataValido(Date data) {
         return true;
-    }
-    
-    public static void main(String[] args) {
-        
-        try {
-            boolean teste = new VendedorBO().deletarVendedor(1);
-            System.out.println(teste);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        
-        
-        
-        
-    }
-
+    }    
 }

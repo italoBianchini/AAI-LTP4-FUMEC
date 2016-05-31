@@ -14,7 +14,7 @@ public class ProdutoModel {
 
     private Integer codigoProduto;
     private String nomeProduto;
-    private Integer codUnidade;
+    private Integer codigoUnidade;
     private double precoProduto;
     private Date dataPreco;
 
@@ -42,12 +42,12 @@ public class ProdutoModel {
         this.nomeProduto = nomeProduto;
     }
 
-    public Integer getCodUnidade() {
-        return codUnidade;
+    public Integer getCodigoUnidade() {
+        return codigoUnidade;
     }
 
-    public void setCodUnidade(Integer codUnidade) {
-        this.codUnidade = codUnidade;
+    public void setCodigoUnidade(Integer codigoUnidade) {
+        this.codigoUnidade = codigoUnidade;
     }
 
     public double getPrecoProduto() {
@@ -68,6 +68,6 @@ public class ProdutoModel {
 
     @Override
     public String toString() {
-        return "ProdutoModel{" + "codigoProduto=" + codigoProduto + ", nomeProduto=" + nomeProduto + ", codUnidade=" + codUnidade + ", precoProduto=" + precoProduto + ", dataPreco=" + dataPreco + '}';
+        return "ProdutoModel{" + "codigoProduto=" + codigoProduto + ", nomeProduto=" + nomeProduto + ", codigoUnidade=" + codigoUnidade + ", precoProduto=" + precoProduto + ", dataPreco=" + dataPreco + '}';
     }
 }
