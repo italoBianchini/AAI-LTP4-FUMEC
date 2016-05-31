@@ -9,7 +9,7 @@ import model.VendedorModel;
 
 /**
  * Classe responsável pelas regras de negócio do objecto <b>VendedorModel</b>
- *
+ *Pacote BO
  * @author Ítalo
  * @version 1.0
  * @since Maio, 2016
