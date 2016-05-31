@@ -30,7 +30,7 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
         try {
             connection = Conexao.getInstance().getConnection();
 
-            String sql = "INSERT INTO tabProdutos (codProduto, produto, codUnidade, preco, dataPreco"
+            String sql = "insert into tabprodutos (codProduto,produto, codUnidade, PRECO, DATAPRECO)"
                     + "VALUES(?,?,?,?,?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);

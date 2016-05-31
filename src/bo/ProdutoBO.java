@@ -19,7 +19,7 @@ public class ProdutoBO {
 
     ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    public boolean inserirVendedor(ProdutoModel produtoModel) throws BusinessException, PersistenciaException {
+    public boolean inserirProduto(ProdutoModel produtoModel) throws BusinessException, PersistenciaException {
         boolean inseriuCorretamente = false;
 
         try {
@@ -36,7 +36,7 @@ public class ProdutoBO {
         return inseriuCorretamente;
     }
 
-    public ProdutoModel recuperarVendedorPorId(int codigoProduto) throws BusinessException, PersistenciaException {
+    public ProdutoModel recuperarProdutoPorId(int codigoProduto) throws BusinessException, PersistenciaException {
         ProdutoModel produtoModel;
 
         try {
@@ -53,7 +53,7 @@ public class ProdutoBO {
         return produtoModel;
     }
 
-    public boolean deletarVendedor(int codigoProduto) throws BusinessException, PersistenciaException {
+    public boolean deletarProduto(int codigoProduto) throws BusinessException, PersistenciaException {
         ProdutoModel produtoModel;
         Boolean deletouCorretamente = false;
 
@@ -73,7 +73,7 @@ public class ProdutoBO {
         return deletouCorretamente;
     }
 
-    public boolean alterarCliente(ProdutoModel produtoAlterado) throws BusinessException, PersistenciaException {
+    public boolean alterarProduto(ProdutoModel produtoAlterado) throws BusinessException, PersistenciaException {
         ProdutoModel produtoOriginal;
         boolean alterouCorretamente = false;
 
@@ -118,7 +118,7 @@ public class ProdutoBO {
         boolean produtoNaoCadastrado = false;
 
         try {
-            produtoNaoCadastrado = vendedorAindaNaoCadastrado(produtoModel.getCodigoProduto());
+            produtoNaoCadastrado = produtoAindaNaoCadastrado(produtoModel.getCodigoProduto());
 
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
@@ -126,7 +126,7 @@ public class ProdutoBO {
         return atributosValidos(produtoModel) && produtoNaoCadastrado;
     }
 
-    public boolean vendedorAindaNaoCadastrado(int codigoProduto) throws PersistenciaException {
+    public boolean produtoAindaNaoCadastrado(int codigoProduto) throws PersistenciaException {
         ProdutoModel produtoModel;
 
         try {
@@ -165,8 +165,17 @@ public class ProdutoBO {
 
     public static void main(String[] args) {
 
+        Date data = new Date(System.currentTimeMillis());
+        ProdutoModel produtoModel = ProdutoModel.CriarProdutoVazio();
+
+        produtoModel.setCodigoProduto(4);
+        produtoModel.setNomeProduto("NomeProduto");
+        produtoModel.setCodigoUnidade(3);
+        produtoModel.setPrecoProduto(1000.00);
+        produtoModel.setDataPreco(data);
+        
         try {
-            boolean teste = new VendedorBO().deletarVendedor(1);
+            boolean teste = new ProdutoBO().inserirProduto(produtoModel);
             System.out.println(teste);
         } catch (Exception e) {
             System.out.println(e);

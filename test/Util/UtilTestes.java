@@ -3,6 +3,7 @@ package Util;
 import java.sql.Date;
 import java.util.Random;
 import model.ClienteModel;
+import model.ProdutoModel;
 import model.VendedorModel;
 
 public class UtilTestes {
@@ -25,18 +26,30 @@ public class UtilTestes {
         return cliente;
     }
 
-    public static VendedorModel criaVendedorAleatorio(){
-        
+    public static VendedorModel criaVendedorAleatorio() {
+
         VendedorModel vendedorModel = VendedorModel.CriaVendedorVazio();
-        
+
         vendedorModel.setCodigoVendedor(criaIdAleatorio());
         vendedorModel.setNomeVendedor(criaPalavraAleatoria());
         vendedorModel.setDataCadVendedor(criaDataCorrente());
-        
+
         return vendedorModel;
     }
-    
-    
+
+    public static ProdutoModel criaProdutoAleatorio() {
+
+        ProdutoModel produtoModel = ProdutoModel.CriarProdutoVazio();
+
+        produtoModel.setCodigoProduto(criaIdAleatorio());
+        produtoModel.setNomeProduto(criaPalavraAleatoria());
+        produtoModel.setCodigoUnidade(criaIdAleatorio());
+        produtoModel.setPrecoProduto(1000.00);
+        produtoModel.setDataPreco(criaDataCorrente());
+
+        return produtoModel;
+    }
+
     public static int criaIdAleatorio() {
 
         Random gerador = new Random();
