@@ -1,6 +1,7 @@
 package dao;
 
 import Exception.PersistenciaException;
+import Exception.ProdutoException;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -163,20 +164,18 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
             if (resultSet.next()) {
 
                 while (resultSet.next()) {
-
                     produtoModel.setCodigoProduto(resultSet.getInt("codProduto"));
                     produtoModel.setNomeProduto(resultSet.getString("Produto"));
                     produtoModel.setCodUnidade(resultSet.getInt("codUnidade"));
                     produtoModel.setPrecoProduto(resultSet.getDouble("preco"));
                     produtoModel.setDataPreco(resultSet.getDate("dataPreco"));
                     
-
                     listaProdutos.add(produtoModel);
                 }
 
             } else {
                 listaProdutos = null;
-                throw new ClienteExcption("Nenhum Cliente encontrado");
+                throw new ProdutoException("Nenhum Cliente encontrado");
             }
 
         } catch (Exception e) {
