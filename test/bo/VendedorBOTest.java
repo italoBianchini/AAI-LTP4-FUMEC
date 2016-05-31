@@ -2,7 +2,6 @@ package bo;
 
 import Exception.PersistenciaException;
 import Util.UtilTestes;
-import java.util.ArrayList;
 import model.VendedorModel;
 import org.junit.Before;
 import org.junit.Test;
