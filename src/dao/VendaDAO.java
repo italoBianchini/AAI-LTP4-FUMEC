@@ -53,7 +53,7 @@ public class VendaDAO implements GenericDAO<VendaModel> {
     }
 
     @Override
-    public Object recuperarPorId(int codigoVenda) throws PersistenciaException {
+    public VendaModel recuperarPorId(int codigoVenda) throws PersistenciaException {
         Connection connection;
         VendaModel vendaModel = VendaModel.CriaVenda();
 
