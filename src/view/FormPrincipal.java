@@ -5,12 +5,20 @@
  */
 package view;
 
+import Util.UtilMensagem;
+import bo.ClienteBO;
+import java.sql.Date;
+import model.ClienteModel;
+
 /**
  *
  * @author Ítalo
  */
 public class FormPrincipal extends javax.swing.JFrame {
 
+    
+    ClienteBO clienteBO = new ClienteBO();
+    
     /**
      * Creates new form FormPrincipal
      */
@@ -106,6 +114,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jLabel9.setText("Email");
 
         jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Limpar");
 
@@ -255,6 +268,48 @@ public class FormPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_codClienteActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        inserirCliente();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public ClienteModel receberDados(){
+        
+        ClienteModel clienteModel = ClienteModel.CriarClienteVazio();
+        clienteModel.setCodigoCliente(Integer.parseInt(txt_codCliente.getText()));
+        clienteModel.setNome(txt_nomeCliente.getText());
+        clienteModel.setEndereco(txt_Endereco.getText());
+        clienteModel.setBairro(txt_bairro.getText());
+        clienteModel.setCidade(txt_cidade.getText());
+        clienteModel.setUf(txt_uf.getText());
+        clienteModel.setCep(txt_cep.getText());
+        clienteModel.setTelefone(txt_telefone.getText());
+        clienteModel.setEmail(txt_email.getText());
+        clienteModel.setDataDeCadastro( new Date(System.currentTimeMillis()));
+        
+        return clienteModel;
+    }
+    
+    public void inserirCliente(){
+        boolean inseriuCorretamente = false;
+        ClienteModel clienteModel = receberDados();
+        
+        try {
+            inseriuCorretamente = clienteBO.inserirCliente(clienteModel);
+            
+        } catch (Exception e) {
+            UtilMensagem.addMsg(FormPrincipal.this, e.getMessage());
+        }
+       
+        if (inseriuCorretamente) {
+            UtilMensagem.addMsg(FormPrincipal.this, "Cliente Cadastrado!");
+        } else {
+            UtilMensagem.addMsg(FormPrincipal.this, "Cliente Não Cadastrado!");
+        }
+        
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
