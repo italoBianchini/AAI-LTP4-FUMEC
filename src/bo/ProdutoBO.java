@@ -165,36 +165,17 @@ public class ProdutoBO {
 
     public static void main(String[] args) {
 
-//        Date data = new Date(System.currentTimeMillis());
-//        ProdutoModel produtoModel = ProdutoModel.CriarProdutoVazio();
-//
-//        produtoModel.setCodigoProduto(7);
-//        produtoModel.setNomeProduto("NomeProduto");
-//        produtoModel.setCodigoUnidade(3);
-//        produtoModel.setPrecoProduto(1000.00);
-//        produtoModel.setDataPreco(data);
-//        
-//        try {
-//            boolean teste = new ProdutoBO().inserirProduto(produtoModel);
-//            System.out.println(teste);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-        boolean alterouCorretamente;
-
+        String nome = "italo";
         try {
+            ArrayList<ProdutoModel> lista = (new ProdutoBO().recuperarProdutoPorNome(nome));
 
-            ProdutoModel produtoRecuperado = new ProdutoBO().recuperarProdutoPorId(477);
-            produtoRecuperado.setNomeProduto("alterar");
-
-            alterouCorretamente = new ProdutoBO().alterarProduto(produtoRecuperado);
-            System.out.println(alterouCorretamente);
+            lista.stream().forEach((produtoModel) -> {
+                System.out.println(produtoModel.toString());
+            });
 
         } catch (Exception e) {
             System.out.println(e);
         }
-
-
-}
+    }
 
 }

@@ -80,10 +80,10 @@ public class ProdutoBOTest {
 
     @Test
     public void testRecuperarProdutoPorNome() throws Exception {
-        String nome = "italo";
+        String nome = "oo8";
         try {
             assertNotNull(produtoBO.recuperarProdutoPorNome(nome));
-
+            assertTrue(produtoBO.recuperarProdutoPorNome(nome).size() > 0);
         } catch (Exception e) {
             System.out.println(e);
         }
