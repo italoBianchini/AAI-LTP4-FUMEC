@@ -163,19 +163,4 @@ public class ProdutoBO {
         return true;
     }
 
-    public static void main(String[] args) {
-
-        String nome = "italo";
-        try {
-            ArrayList<ProdutoModel> lista = (new ProdutoBO().recuperarProdutoPorNome(nome));
-
-            lista.stream().forEach((produtoModel) -> {
-                System.out.println(produtoModel.toString());
-            });
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
 }
