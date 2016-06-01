@@ -20,7 +20,7 @@ import model.VendaModel;
  */
 public class VendaDAO implements GenericDAO<VendaModel> {
 
-    private final String SQL_BASE = "SELECT codVenda, codVendedor, codCliente, dataVenda from Vendas ";
+    private final String SQL_BASE = "SELECT codVenda, cod_Vendedor, codCliente, data_Venda from Vendas ";
 
     @Override
     public boolean inserir(VendaModel vendaModel) throws PersistenciaException {
@@ -31,7 +31,7 @@ public class VendaDAO implements GenericDAO<VendaModel> {
         try {
             connection = Conexao.getInstance().getConnection();
 
-            String sql = "insert into Vendas (codVenda, codVendedor, codCliente, dataVenda)"
+            String sql = "insert into Vendas (codVenda, cod_Vendedor, codCliente, data_Venda)"
                     + "VALUES(?,?,?,?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -71,9 +71,9 @@ public class VendaDAO implements GenericDAO<VendaModel> {
             if (resultSet.next()) {
 
                 vendaModel.setCodigoVenda(codigoVenda);
-                vendaModel.setCodigoVendedor(resultSet.getInt("codVendedor"));
+                vendaModel.setCodigoVendedor(resultSet.getInt("cod_Vendedor"));
                 vendaModel.setCodigoCliente(resultSet.getInt("codCliente"));
-                vendaModel.setDataVenda(resultSet.getDate("dataVenda"));
+                vendaModel.setDataVenda(resultSet.getDate("data_Venda"));
 
             } else {
                 vendaModel = null;
@@ -120,7 +120,7 @@ public class VendaDAO implements GenericDAO<VendaModel> {
         try {
             connection = conexao.Conexao.getInstance().getConnection();
 
-            String sql = "UPDATE vendas SET codVendedor = ? , codCliente = ?, dataVenda = ?"
+            String sql = "UPDATE vendas SET cod_Vendedor = ? , codCliente = ?, data_Venda = ?"
                     + " WHERE codVenda = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -151,7 +151,7 @@ public class VendaDAO implements GenericDAO<VendaModel> {
             connection = conexao.Conexao.getInstance().getConnection();
 
             //TODO Corrigir SQL
-            String sql = SQL_BASE + "WHERE produto LIKE ? ORDER BY produto";
+            String sql = null;
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
