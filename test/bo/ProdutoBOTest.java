@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bo;
 
 import Exception.PersistenciaException;
@@ -12,6 +7,7 @@ import model.ProdutoModel;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
@@ -21,20 +17,40 @@ public class ProdutoBOTest {
 
     ProdutoBO produtoBO = new ProdutoBO();
 
+    public ProdutoBOTest(){
+        
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @Test
+    public void testRecuperarProdutoPorId() throws Exception {
+        try {
+            assertNotNull(produtoBO.recuperarProdutoPorId(4));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Ignore
+    @Test
+    public void testDeletarProduto() throws Exception {
+        try {
+            assertTrue(produtoBO.deletarProduto(6));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     @Test
     public void testInserirProduto() throws Exception {
+        ProdutoModel produtoModel = UtilTestes.criaProdutoAleatorio();
+        produtoModel.setCodigoUnidade(2);
 
-        //ProdutoModel produtoModel = UtilTestes.criaProdutoAleatorio();
-
-        Date data = new Date(System.currentTimeMillis());
-        ProdutoModel produtoModel = ProdutoModel.CriarProdutoVazio();
-
-        produtoModel.setCodigoProduto(5);
-        produtoModel.setNomeProduto("NomeProduto");
-        produtoModel.setCodigoUnidade(5);
-        produtoModel.setPrecoProduto(1000.00);
-        produtoModel.setDataPreco(data);
-        
         try {
 
             assertTrue(produtoBO.inserirProduto(produtoModel));
@@ -47,18 +63,29 @@ public class ProdutoBOTest {
     }
 
     @Test
-    public void testRecuperarVendedorPorId() throws Exception {
-    }
+    public void testAlterarProduto() throws Exception {
+        boolean alterouCorretamente;
 
-    @Test
-    public void testDeletarVendedor() throws Exception {
-    }
+        try {
 
-    @Test
-    public void testAlterarCliente() throws Exception {
+            ProdutoModel produtoRecuperado = produtoBO.recuperarProdutoPorId(477);
+            produtoRecuperado.setNomeProduto("italo");
+
+            assertTrue(produtoBO.alterarProduto(produtoRecuperado));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Test
     public void testRecuperarProdutoPorNome() throws Exception {
+        String nome = "italo";
+        try {
+            assertNotNull(produtoBO.recuperarProdutoPorNome(nome));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

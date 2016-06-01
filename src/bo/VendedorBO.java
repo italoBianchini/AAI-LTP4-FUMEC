@@ -72,7 +72,7 @@ public class VendedorBO {
         return deletouCorretamente;
     }
 
-    public boolean alterarCliente(VendedorModel vendedorAlterado) throws BusinessException, PersistenciaException {
+    public boolean alterarVendedor(VendedorModel vendedorAlterado) throws BusinessException, PersistenciaException {
         VendedorModel vendedorOriginal;
         boolean alterouCorretamente = false;
 

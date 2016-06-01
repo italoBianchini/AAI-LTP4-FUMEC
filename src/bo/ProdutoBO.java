@@ -113,7 +113,7 @@ public class ProdutoBO {
         }
         return listaDeProdutos;
     }
-    
+
     public boolean produtoValido(ProdutoModel produtoModel) throws PersistenciaException {
         boolean produtoNaoCadastrado = false;
 
@@ -165,22 +165,36 @@ public class ProdutoBO {
 
     public static void main(String[] args) {
 
-        Date data = new Date(System.currentTimeMillis());
-        ProdutoModel produtoModel = ProdutoModel.CriarProdutoVazio();
+//        Date data = new Date(System.currentTimeMillis());
+//        ProdutoModel produtoModel = ProdutoModel.CriarProdutoVazio();
+//
+//        produtoModel.setCodigoProduto(7);
+//        produtoModel.setNomeProduto("NomeProduto");
+//        produtoModel.setCodigoUnidade(3);
+//        produtoModel.setPrecoProduto(1000.00);
+//        produtoModel.setDataPreco(data);
+//        
+//        try {
+//            boolean teste = new ProdutoBO().inserirProduto(produtoModel);
+//            System.out.println(teste);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+        boolean alterouCorretamente;
 
-        produtoModel.setCodigoProduto(4);
-        produtoModel.setNomeProduto("NomeProduto");
-        produtoModel.setCodigoUnidade(3);
-        produtoModel.setPrecoProduto(1000.00);
-        produtoModel.setDataPreco(data);
-        
         try {
-            boolean teste = new ProdutoBO().inserirProduto(produtoModel);
-            System.out.println(teste);
+
+            ProdutoModel produtoRecuperado = new ProdutoBO().recuperarProdutoPorId(477);
+            produtoRecuperado.setNomeProduto("alterar");
+
+            alterouCorretamente = new ProdutoBO().alterarProduto(produtoRecuperado);
+            System.out.println(alterouCorretamente);
+
         } catch (Exception e) {
             System.out.println(e);
         }
 
-    }
+
+}
 
 }

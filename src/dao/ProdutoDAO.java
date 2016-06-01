@@ -30,7 +30,7 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
         try {
             connection = Conexao.getInstance().getConnection();
 
-            String sql = "insert into tabprodutos (codProduto,produto, codUnidade, PRECO, DATAPRECO)"
+            String sql = "insert into tabprodutos (codProduto, produto, codUnidade, preco, dataPreco)"
                     + "VALUES(?,?,?,?,?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -72,7 +72,7 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
             if (resultSet.next()) {
 
                 produtoModel.setCodigoProduto(idProduto);
-                produtoModel.setNomeProduto(resultSet.getString("Nome"));
+                produtoModel.setNomeProduto(resultSet.getString("Produto"));
                 produtoModel.setCodigoUnidade(resultSet.getInt("codUnidade"));
                 produtoModel.setPrecoProduto(resultSet.getDouble("preco"));
                 produtoModel.setDataPreco(resultSet.getDate("dataPreco"));
@@ -123,7 +123,7 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
         try {
             connection = conexao.Conexao.getInstance().getConnection();
 
-            String sql = "UPDATE tabProdutos SET codProduto = ? , nome = ?, codUnidade = ?, preco = ?, dataPreco = ?"
+            String sql = "UPDATE tabProdutos SET produto = ? , codUnidade = ?, preco = ?, dataPreco = ?"
                     + " WHERE codProduto = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -132,6 +132,7 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
             statement.setInt(2, produtoModel.getCodigoUnidade());
             statement.setDouble(3, produtoModel.getPrecoProduto());
             statement.setDate(4, produtoModel.getDataPreco());
+            statement.setInt(5, produtoModel.getCodigoProduto());
 
             statement.executeUpdate();
             alterouCorretamente = true;

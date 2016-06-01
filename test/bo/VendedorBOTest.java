@@ -8,6 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 
+
 /**
  *
  * @author Ítalo
@@ -28,7 +29,6 @@ public class VendedorBOTest {
         VendedorModel vendedorModel = UtilTestes.criaVendedorAleatorio();
 
         try {
-            vendedorModel.setCodigoVendedor(1);
             assertTrue(vendedorBO.inserirVendedor(vendedorModel));
 
         } catch (Exception e) {
@@ -38,20 +38,21 @@ public class VendedorBOTest {
 
     }
 
-    @Ignore
+    
     @Test
     public void testRecuperarVendedorPorId() throws Exception {
 
         try {
-            assertNotNull(vendedorBO.recuperarVendedorPorId(1));
+            assertNotNull(vendedorBO.recuperarVendedorPorId(822));
 
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
+    @Ignore
     @Test
-    public void testDeletarCliente() throws Exception {
+    public void testDeletarVendedor() throws Exception {
 
         try {
             assertTrue(vendedorBO.deletarVendedor(1));
@@ -63,11 +64,11 @@ public class VendedorBOTest {
     }
 
     @Test
-    public void testAlterarCliente() throws Exception {
+    public void testAlterarVendedor() throws Exception {
         boolean alterouCorretamente;
         VendedorModel vendedorModel = UtilTestes.criaVendedorAleatorio();
         try {
-            assertTrue(vendedorBO.alterarCliente(vendedorModel));
+            assertTrue(vendedorBO.alterarVendedor(vendedorModel));
 
         } catch (Exception e) {
             System.out.println(e);
