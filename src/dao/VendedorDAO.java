@@ -173,9 +173,16 @@ public class VendedorDAO implements GenericDAO<VendedorModel> {
                 throw new ClienteExcption("Nenhum Vendedor encontrado");
             }
 
+            connection.close();
+            
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
         }
         return listaVendedores;
+    }
+
+    @Override
+    public ArrayList recuperarTodosRegistros() throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

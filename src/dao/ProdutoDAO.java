@@ -178,10 +178,17 @@ public class ProdutoDAO implements GenericDAO<ProdutoModel> {
                 listaProdutos = null;
                 throw new ProdutoException("Nenhum Cliente encontrado");
             }
+            
+            connection.close();
 
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
         }
         return listaProdutos;
+    }
+
+    @Override
+    public ArrayList recuperarTodosRegistros() throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -174,10 +174,17 @@ public class VendaDAO implements GenericDAO<VendaModel> {
                 throw new VendaException("Nenhuma Venda Encontrada");
             }
 
+            connection.close();
+            
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
         }
         return listaVendas;
+    }
+
+    @Override
+    public ArrayList recuperarTodosRegistros() throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

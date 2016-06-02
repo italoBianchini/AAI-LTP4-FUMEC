@@ -201,6 +201,8 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
                 throw new ClienteExcption("Nenhum Cliente encontrado");
             }
 
+            connection.close();
+            
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
         }
@@ -211,7 +213,6 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
     public ArrayList recuperarTodosRegistros() throws PersistenciaException {
         Connection connection;
         ArrayList<ClienteModel> listaClientes = new ArrayList<>();
-        ClienteModel clienteModel = ClienteModel.CriarClienteVazio();
 
         try {
             connection = conexao.Conexao.getInstance().getConnection();
@@ -221,20 +222,23 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
 
             while (resultSet.next()) {
 
-                clienteModel.setCodigoCliente(resultSet.getInt("codCliente"));
-                clienteModel.setNome(resultSet.getString("Nome"));
-                clienteModel.setEndereco(resultSet.getString("Endereco"));
-                clienteModel.setBairro(resultSet.getString("Bairro"));
-                clienteModel.setCidade(resultSet.getString("Cidade"));
-                clienteModel.setUf(resultSet.getString("Uf"));
-                clienteModel.setCep(resultSet.getString("Cep"));
-                clienteModel.setTelefone(resultSet.getString("Telefone"));
-                clienteModel.setEmail(resultSet.getString("E_mail"));
-                clienteModel.setDataDeCadastro(resultSet.getDate("data_cad_cliente"));
+                ClienteModel cliente = ClienteModel.CriarClienteVazio();
+                
+                cliente.setCodigoCliente(resultSet.getInt("codCliente"));
+                cliente.setNome(resultSet.getString("Nome"));
+                cliente.setEndereco(resultSet.getString("Endereco"));
+                cliente.setBairro(resultSet.getString("Bairro"));
+                cliente.setCidade(resultSet.getString("Cidade"));
+                cliente.setUf(resultSet.getString("Uf"));
+                cliente.setCep(resultSet.getString("Cep"));
+                cliente.setTelefone(resultSet.getString("Telefone"));
+                cliente.setEmail(resultSet.getString("E_mail"));
+                cliente.setDataDeCadastro(resultSet.getDate("data_cad_cliente"));
 
-                listaClientes.add(clienteModel);
+                listaClientes.add(cliente);
             }
-
+            connection.close();
+            
         } catch (Exception e) {
             throw new PersistenciaException(e.getMessage(), e);
         }
