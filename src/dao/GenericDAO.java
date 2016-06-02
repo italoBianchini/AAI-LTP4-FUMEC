@@ -23,4 +23,6 @@ public interface GenericDAO<genericObject> {
      boolean alterar(genericObject obj) throws  PersistenciaException;
 
      ArrayList recuperarPorNome(String nome)throws  PersistenciaException;
+     
+     ArrayList recuperarTodosRegistros()throws  PersistenciaException;
 }

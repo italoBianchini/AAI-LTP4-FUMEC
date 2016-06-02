@@ -7,7 +7,12 @@ package view;
 
 import Util.UtilMensagem;
 import bo.ClienteBO;
+import dao.ClienteDAO;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.function.Consumer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import model.ClienteModel;
 
 /**
@@ -16,9 +21,8 @@ import model.ClienteModel;
  */
 public class FormPrincipal extends javax.swing.JFrame {
 
-    
     ClienteBO clienteBO = new ClienteBO();
-    
+
     /**
      * Creates new form FormPrincipal
      */
@@ -38,7 +42,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableCliente = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txt_codCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -57,10 +61,10 @@ public class FormPrincipal extends javax.swing.JFrame {
         txt_telefone = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnSalva = new javax.swing.JButton();
+        btnLimpa = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnBusca = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -70,18 +74,17 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jTabbedPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 12), new java.awt.Color(102, 153, 255))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tableCliente.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tableCliente);
+        tableCliente.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jLabel1.setText("Código");
 
@@ -113,18 +116,28 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jLabel9.setText("Email");
 
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalva.setText("Salvar");
+        btnSalva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalvaActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Limpar");
+        btnLimpa.setText("Limpar");
+        btnLimpa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpaActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Excluir");
+        btnExcluir.setText("Excluir");
 
-        jButton4.setText("Buscar");
+        btnBusca.setText("Buscar");
+        btnBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -177,13 +190,13 @@ public class FormPrincipal extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(btnLimpa)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
+                                .addComponent(btnSalva))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jScrollPane1)))
@@ -196,8 +209,8 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnBusca))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -226,8 +239,8 @@ public class FormPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnSalva)
+                    .addComponent(btnLimpa))
                 .addContainerGap())
         );
 
@@ -268,48 +281,102 @@ public class FormPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_codClienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvaActionPerformed
         inserirCliente();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSalvaActionPerformed
 
-    public ClienteModel receberDados(){
-        
+    private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
+        enviarDadosParaTabela();
+    }//GEN-LAST:event_btnBuscaActionPerformed
+
+    private void btnLimpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpaActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_btnLimpaActionPerformed
+
+    public void limparCampos() {
+        txt_Endereco.setText("");
+        txt_bairro.setText("");
+        txt_cep.setText("");
+        txt_cidade.setText("");
+        txt_codCliente.setText("");
+        txt_email.setText("");
+        txt_nomeCliente.setText("");
+        txt_telefone.setText("");
+        txt_uf.setText("");
+
+    }
+
+    public ClienteModel receberDados() {
+
         ClienteModel clienteModel = ClienteModel.CriarClienteVazio();
-        clienteModel.setCodigoCliente(Integer.parseInt(txt_codCliente.getText()));
-        clienteModel.setNome(txt_nomeCliente.getText());
-        clienteModel.setEndereco(txt_Endereco.getText());
-        clienteModel.setBairro(txt_bairro.getText());
-        clienteModel.setCidade(txt_cidade.getText());
-        clienteModel.setUf(txt_uf.getText());
-        clienteModel.setCep(txt_cep.getText());
-        clienteModel.setTelefone(txt_telefone.getText());
-        clienteModel.setEmail(txt_email.getText());
-        clienteModel.setDataDeCadastro( new Date(System.currentTimeMillis()));
-        
+
+        try {
+
+            clienteModel.setCodigoCliente(Integer.parseInt(txt_codCliente.getText()));
+            clienteModel.setNome(txt_nomeCliente.getText());
+            clienteModel.setEndereco(txt_Endereco.getText());
+            clienteModel.setBairro(txt_bairro.getText());
+            clienteModel.setCidade(txt_cidade.getText());
+            clienteModel.setUf(txt_uf.getText());
+            clienteModel.setCep(txt_cep.getText());
+            clienteModel.setTelefone(txt_telefone.getText());
+            clienteModel.setEmail(txt_email.getText());
+            clienteModel.setDataDeCadastro(new Date(System.currentTimeMillis()));
+        } catch (Exception e) {
+            clienteModel = null;
+            UtilMensagem.addMsg(FormPrincipal.this, "Cliente Inválido");
+        }
         return clienteModel;
     }
-    
-    public void inserirCliente(){
+
+    public void inserirCliente() {
         boolean inseriuCorretamente = false;
         ClienteModel clienteModel = receberDados();
-        
-        try {
-            inseriuCorretamente = clienteBO.inserirCliente(clienteModel);
-            
-        } catch (Exception e) {
-            UtilMensagem.addMsg(FormPrincipal.this, e.getMessage());
+
+        if (null != clienteModel) {
+
+            try {
+                inseriuCorretamente = clienteBO.inserirCliente(clienteModel);
+
+            } catch (Exception e) {
+                UtilMensagem.addMsg(FormPrincipal.this, e.getMessage());
+            }
+
+            if (inseriuCorretamente) {
+                UtilMensagem.addMsg(FormPrincipal.this, "Cliente Cadastrado Com Sucesso!");
+            }
         }
-       
-        if (inseriuCorretamente) {
-            UtilMensagem.addMsg(FormPrincipal.this, "Cliente Cadastrado!");
-        } else {
-            UtilMensagem.addMsg(FormPrincipal.this, "Cliente Não Cadastrado!");
-        }
-        
+
     }
-    
-    
-    
+
+    public void enviarDadosParaTabela() {
+
+        try {
+
+            ArrayList<ClienteModel> lista = clienteBO.listaTodosClientes();
+
+            DefaultTableModel model = (DefaultTableModel) tableCliente.getModel();
+
+            lista.stream().forEach((cliente) -> {
+                model.addRow(new Object[]{cliente.getCodigoCliente().toString(),
+                    cliente.getNome(),
+                    cliente.getEndereco(),
+                    cliente.getBairro(),
+                    cliente.getCidade(),
+                    cliente.getUf(),
+                    cliente.getCep(),
+                    cliente.getTelefone(),
+                    cliente.getEmail(),
+                    cliente.getDataDeCadastro().toString()
+                });
+            });
+
+        } catch (Exception e) {
+
+        }
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -340,16 +407,20 @@ public class FormPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormPrincipal().setVisible(true);
+
+                FormPrincipal frame = new FormPrincipal();
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnBusca;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnLimpa;
+    private javax.swing.JButton btnSalva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -365,7 +436,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableCliente;
     private javax.swing.JTextField txt_Endereco;
     private javax.swing.JTextField txt_bairro;
     private javax.swing.JTextField txt_cep;

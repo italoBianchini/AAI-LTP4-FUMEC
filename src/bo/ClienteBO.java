@@ -5,6 +5,7 @@ import Exception.PersistenciaException;
 import dao.ClienteDAO;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 import model.ClienteModel;
 
 /**
@@ -80,7 +81,7 @@ public class ClienteBO {
         try {
             clienteOriginal = clienteDAO.recuperarPorId(clienteAlterado.getCodigoCliente());
 
-           if (clienteOriginal != clienteAlterado) {
+            if (clienteOriginal != clienteAlterado) {
                 alterouCorretamente = clienteDAO.alterar(clienteAlterado);
 
             } else {
@@ -113,6 +114,18 @@ public class ClienteBO {
             throw new PersistenciaException(e.getMessage(), e);
         }
         return listaDeClientes;
+    }
+
+    public ArrayList listaTodosClientes() throws BusinessException {
+
+        ArrayList<ClienteModel> listaClientes;
+        try {
+            listaClientes = clienteDAO.recuperarTodosRegistros();
+
+        } catch (Exception exception) {
+            throw new BusinessException(exception.getMessage());
+        }
+        return listaClientes;
     }
 
     public boolean clienteValido(ClienteModel clienteModel) throws PersistenciaException {

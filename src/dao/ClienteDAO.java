@@ -173,7 +173,7 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
             String sql = SQL_BASE + "WHERE nome LIKE ? ORDER BY nome";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            
+
             statement.setString(1, "%" + nomeInformado + "%");
             statement.executeQuery();
             ResultSet resultSet = statement.executeQuery();
@@ -199,6 +199,40 @@ public class ClienteDAO implements GenericDAO<ClienteModel> {
             } else {
                 listaClientes = null;
                 throw new ClienteExcption("Nenhum Cliente encontrado");
+            }
+
+        } catch (Exception e) {
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        return listaClientes;
+    }
+
+    @Override
+    public ArrayList recuperarTodosRegistros() throws PersistenciaException {
+        Connection connection;
+        ArrayList<ClienteModel> listaClientes = new ArrayList<>();
+        ClienteModel clienteModel = ClienteModel.CriarClienteVazio();
+
+        try {
+            connection = conexao.Conexao.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_BASE);
+            statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                clienteModel.setCodigoCliente(resultSet.getInt("codCliente"));
+                clienteModel.setNome(resultSet.getString("Nome"));
+                clienteModel.setEndereco(resultSet.getString("Endereco"));
+                clienteModel.setBairro(resultSet.getString("Bairro"));
+                clienteModel.setCidade(resultSet.getString("Cidade"));
+                clienteModel.setUf(resultSet.getString("Uf"));
+                clienteModel.setCep(resultSet.getString("Cep"));
+                clienteModel.setTelefone(resultSet.getString("Telefone"));
+                clienteModel.setEmail(resultSet.getString("E_mail"));
+                clienteModel.setDataDeCadastro(resultSet.getDate("data_cad_cliente"));
+
+                listaClientes.add(clienteModel);
             }
 
         } catch (Exception e) {
