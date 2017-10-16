@@ -2,7 +2,7 @@
 
 Autoinstrucional LTP4 - Fumec
 
-Trata-se de um sistema controlar de vendas construido com o intuito de exemplificar o uso de:
+Trata-se de um sistema controlador de vendas construido com o intuito de exemplificar o uso de:
 
 - Padrão MVC
 - GenericDAO
